@@ -1,4 +1,4 @@
-﻿namespace src
+﻿namespace DirectoryTraversal.GUI
 {
     partial class MainForm
     {
@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            Microsoft.Msagl.GraphViewerGdi.GViewer gViewer1;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.Title = new System.Windows.Forms.Label();
             this.OutputPanel = new System.Windows.Forms.Panel();
             this.OutputLabel = new System.Windows.Forms.Label();
@@ -41,7 +43,49 @@
             this.BFSButton = new System.Windows.Forms.RadioButton();
             this.DFSButton = new System.Windows.Forms.RadioButton();
             this.SearchButton = new System.Windows.Forms.Button();
+            gViewer1 = new Microsoft.Msagl.GraphViewerGdi.GViewer();
+            this.OutputPanel.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // gViewer1
+            // 
+            gViewer1.ArrowheadLength = 10D;
+            gViewer1.AsyncLayout = false;
+            gViewer1.AutoScroll = true;
+            gViewer1.BackwardEnabled = false;
+            gViewer1.BuildHitTree = true;
+            gViewer1.CurrentLayoutMethod = Microsoft.Msagl.GraphViewerGdi.LayoutMethod.UseSettingsOfTheGraph;
+            gViewer1.EdgeInsertButtonVisible = false;
+            gViewer1.FileName = "";
+            gViewer1.ForwardEnabled = false;
+            gViewer1.Graph = null;
+            gViewer1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            gViewer1.InsertingEdge = false;
+            gViewer1.LayoutAlgorithmSettingsButtonVisible = false;
+            gViewer1.LayoutEditingEnabled = false;
+            gViewer1.Location = new System.Drawing.Point(0, 0);
+            gViewer1.LooseOffsetForRouting = 0.25D;
+            gViewer1.MouseHitDistance = 0.05D;
+            gViewer1.Name = "gViewer1";
+            gViewer1.NavigationVisible = false;
+            gViewer1.NeedToCalculateLayout = true;
+            gViewer1.OffsetForRelaxingInRouting = 0.6D;
+            gViewer1.PaddingForEdgeRouting = 8D;
+            gViewer1.PanButtonPressed = false;
+            gViewer1.SaveAsImageEnabled = true;
+            gViewer1.SaveAsMsaglEnabled = true;
+            gViewer1.SaveButtonVisible = true;
+            gViewer1.SaveGraphButtonVisible = true;
+            gViewer1.SaveInVectorFormatEnabled = true;
+            gViewer1.Size = new System.Drawing.Size(382, 314);
+            gViewer1.TabIndex = 0;
+            gViewer1.TightOffsetForRouting = 0.125D;
+            gViewer1.ToolBarIsVisible = true;
+            gViewer1.Transform = ((Microsoft.Msagl.Core.Geometry.Curves.PlaneTransformation)(resources.GetObject("gViewer1.Transform")));
+            gViewer1.UndoRedoButtonsVisible = true;
+            gViewer1.WindowZoomButtonPressed = false;
+            gViewer1.ZoomF = 1D;
+            gViewer1.ZoomWindowThreshold = 0.05D;
             // 
             // Title
             // 
@@ -49,26 +93,28 @@
             this.Title.Enabled = false;
             this.Title.Font = new System.Drawing.Font("Segoe UI Emoji", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Title.ForeColor = System.Drawing.Color.Black;
-            this.Title.Location = new System.Drawing.Point(320, 9);
+            this.Title.Location = new System.Drawing.Point(286, 9);
             this.Title.Name = "Title";
-            this.Title.Size = new System.Drawing.Size(237, 46);
+            this.Title.Size = new System.Drawing.Size(187, 36);
             this.Title.TabIndex = 0;
             this.Title.Text = "Folder Crawler";
             // 
             // OutputPanel
             // 
-            this.OutputPanel.Location = new System.Drawing.Point(410, 143);
+            this.OutputPanel.Controls.Add(gViewer1);
+            this.OutputPanel.Location = new System.Drawing.Point(359, 107);
+            this.OutputPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.OutputPanel.Name = "OutputPanel";
-            this.OutputPanel.Size = new System.Drawing.Size(436, 419);
+            this.OutputPanel.Size = new System.Drawing.Size(382, 314);
             this.OutputPanel.TabIndex = 1;
             // 
             // OutputLabel
             // 
             this.OutputLabel.AutoSize = true;
             this.OutputLabel.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.OutputLabel.Location = new System.Drawing.Point(410, 90);
+            this.OutputLabel.Location = new System.Drawing.Point(359, 68);
             this.OutputLabel.Name = "OutputLabel";
-            this.OutputLabel.Size = new System.Drawing.Size(113, 41);
+            this.OutputLabel.Size = new System.Drawing.Size(90, 32);
             this.OutputLabel.TabIndex = 2;
             this.OutputLabel.Text = "Output";
             // 
@@ -76,27 +122,27 @@
             // 
             this.InputLabel.AutoSize = true;
             this.InputLabel.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.InputLabel.Location = new System.Drawing.Point(39, 90);
+            this.InputLabel.Location = new System.Drawing.Point(34, 68);
             this.InputLabel.Name = "InputLabel";
-            this.InputLabel.Size = new System.Drawing.Size(88, 41);
+            this.InputLabel.Size = new System.Drawing.Size(70, 32);
             this.InputLabel.TabIndex = 3;
             this.InputLabel.Text = "Input";
             // 
             // DirectoryLabel
             // 
             this.DirectoryLabel.AutoSize = true;
-            this.DirectoryLabel.Location = new System.Drawing.Point(39, 143);
+            this.DirectoryLabel.Location = new System.Drawing.Point(34, 107);
             this.DirectoryLabel.Name = "DirectoryLabel";
-            this.DirectoryLabel.Size = new System.Drawing.Size(179, 20);
+            this.DirectoryLabel.Size = new System.Drawing.Size(142, 15);
             this.DirectoryLabel.TabIndex = 0;
             this.DirectoryLabel.Text = "Choose Starting Directory";
             // 
             // FileLabel
             // 
             this.FileLabel.AutoSize = true;
-            this.FileLabel.Location = new System.Drawing.Point(39, 254);
+            this.FileLabel.Location = new System.Drawing.Point(34, 190);
             this.FileLabel.Name = "FileLabel";
-            this.FileLabel.Size = new System.Drawing.Size(114, 20);
+            this.FileLabel.Size = new System.Drawing.Size(91, 15);
             this.FileLabel.TabIndex = 4;
             this.FileLabel.Text = "Input File Name";
             // 
@@ -105,9 +151,10 @@
             this.DirButton.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.DirButton.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.DirButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.DirButton.Location = new System.Drawing.Point(39, 166);
+            this.DirButton.Location = new System.Drawing.Point(34, 124);
+            this.DirButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DirButton.Name = "DirButton";
-            this.DirButton.Size = new System.Drawing.Size(176, 46);
+            this.DirButton.Size = new System.Drawing.Size(154, 34);
             this.DirButton.TabIndex = 5;
             this.DirButton.Text = "Choose Folder...";
             this.DirButton.UseVisualStyleBackColor = false;
@@ -116,18 +163,20 @@
             // FileInput
             // 
             this.FileInput.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.FileInput.Location = new System.Drawing.Point(39, 277);
+            this.FileInput.Location = new System.Drawing.Point(34, 208);
+            this.FileInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.FileInput.Name = "FileInput";
-            this.FileInput.Size = new System.Drawing.Size(289, 34);
+            this.FileInput.Size = new System.Drawing.Size(253, 29);
             this.FileInput.TabIndex = 6;
             // 
             // OccurenceCheckBox
             // 
             this.OccurenceCheckBox.AutoSize = true;
             this.OccurenceCheckBox.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.OccurenceCheckBox.Location = new System.Drawing.Point(39, 330);
+            this.OccurenceCheckBox.Location = new System.Drawing.Point(34, 248);
+            this.OccurenceCheckBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.OccurenceCheckBox.Name = "OccurenceCheckBox";
-            this.OccurenceCheckBox.Size = new System.Drawing.Size(176, 27);
+            this.OccurenceCheckBox.Size = new System.Drawing.Size(142, 23);
             this.OccurenceCheckBox.TabIndex = 7;
             this.OccurenceCheckBox.Text = "Find all occurences";
             this.OccurenceCheckBox.UseVisualStyleBackColor = true;
@@ -136,9 +185,9 @@
             // MethodLabel
             // 
             this.MethodLabel.AutoSize = true;
-            this.MethodLabel.Location = new System.Drawing.Point(39, 381);
+            this.MethodLabel.Location = new System.Drawing.Point(34, 286);
             this.MethodLabel.Name = "MethodLabel";
-            this.MethodLabel.Size = new System.Drawing.Size(147, 20);
+            this.MethodLabel.Size = new System.Drawing.Size(118, 15);
             this.MethodLabel.TabIndex = 8;
             this.MethodLabel.Text = "Input Search Method";
             // 
@@ -146,9 +195,10 @@
             // 
             this.BFSButton.AutoSize = true;
             this.BFSButton.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.BFSButton.Location = new System.Drawing.Point(39, 404);
+            this.BFSButton.Location = new System.Drawing.Point(34, 303);
+            this.BFSButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BFSButton.Name = "BFSButton";
-            this.BFSButton.Size = new System.Drawing.Size(225, 27);
+            this.BFSButton.Size = new System.Drawing.Size(183, 23);
             this.BFSButton.TabIndex = 9;
             this.BFSButton.TabStop = true;
             this.BFSButton.Text = "BFS (Breadth First Search)";
@@ -159,9 +209,10 @@
             // 
             this.DFSButton.AutoSize = true;
             this.DFSButton.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.DFSButton.Location = new System.Drawing.Point(39, 437);
+            this.DFSButton.Location = new System.Drawing.Point(34, 328);
+            this.DFSButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DFSButton.Name = "DFSButton";
-            this.DFSButton.Size = new System.Drawing.Size(214, 27);
+            this.DFSButton.Size = new System.Drawing.Size(175, 23);
             this.DFSButton.TabIndex = 10;
             this.DFSButton.TabStop = true;
             this.DFSButton.Text = "DFS (Depth First Search)";
@@ -173,9 +224,10 @@
             this.SearchButton.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.SearchButton.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.SearchButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.SearchButton.Location = new System.Drawing.Point(39, 481);
+            this.SearchButton.Location = new System.Drawing.Point(34, 361);
+            this.SearchButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.SearchButton.Name = "SearchButton";
-            this.SearchButton.Size = new System.Drawing.Size(176, 46);
+            this.SearchButton.Size = new System.Drawing.Size(154, 34);
             this.SearchButton.TabIndex = 11;
             this.SearchButton.Text = "Search...";
             this.SearchButton.UseVisualStyleBackColor = false;
@@ -183,9 +235,9 @@
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(893, 672);
+            this.ClientSize = new System.Drawing.Size(781, 504);
             this.Controls.Add(this.SearchButton);
             this.Controls.Add(this.DFSButton);
             this.Controls.Add(this.BFSButton);
@@ -199,8 +251,10 @@
             this.Controls.Add(this.OutputPanel);
             this.Controls.Add(this.Title);
             this.Controls.Add(this.FileInput);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainForm";
             this.Text = "Folder Crawler";
+            this.OutputPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -221,5 +275,6 @@
         private RadioButton BFSButton;
         private RadioButton DFSButton;
         private Button SearchButton;
+        private Microsoft.Msagl.GraphViewerGdi.GViewer gViewer1;
     }
 }

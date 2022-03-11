@@ -1,4 +1,4 @@
-namespace src
+namespace DirectoryTraversal.GUI.DirectoryTraversalGUI
 {
     internal static class Program
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace src
+namespace DirectoryTraversal.GUI
 {
     public partial class MainForm : Form
     {
@@ -85,7 +85,6 @@ namespace src
             );
             //TODO: Deliver to backend around here
         }
-
 
     }
 }
