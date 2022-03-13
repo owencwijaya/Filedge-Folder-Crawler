@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Microsoft.Msagl.GraphViewerGdi.GViewer gViewer1;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.Title = new System.Windows.Forms.Label();
             this.OutputPanel = new System.Windows.Forms.Panel();
             this.OutputLabel = new System.Windows.Forms.Label();
@@ -43,49 +41,11 @@
             this.BFSButton = new System.Windows.Forms.RadioButton();
             this.DFSButton = new System.Windows.Forms.RadioButton();
             this.SearchButton = new System.Windows.Forms.Button();
-            gViewer1 = new Microsoft.Msagl.GraphViewerGdi.GViewer();
-            this.OutputPanel.SuspendLayout();
+            this.delaySpeed = new System.Windows.Forms.TrackBar();
+            this.label1 = new System.Windows.Forms.Label();
+            this.delayLabel = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.delaySpeed)).BeginInit();
             this.SuspendLayout();
-            // 
-            // gViewer1
-            // 
-            gViewer1.ArrowheadLength = 10D;
-            gViewer1.AsyncLayout = false;
-            gViewer1.AutoScroll = true;
-            gViewer1.BackwardEnabled = false;
-            gViewer1.BuildHitTree = true;
-            gViewer1.CurrentLayoutMethod = Microsoft.Msagl.GraphViewerGdi.LayoutMethod.UseSettingsOfTheGraph;
-            gViewer1.EdgeInsertButtonVisible = false;
-            gViewer1.FileName = "";
-            gViewer1.ForwardEnabled = false;
-            gViewer1.Graph = null;
-            gViewer1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            gViewer1.InsertingEdge = false;
-            gViewer1.LayoutAlgorithmSettingsButtonVisible = false;
-            gViewer1.LayoutEditingEnabled = false;
-            gViewer1.Location = new System.Drawing.Point(0, 0);
-            gViewer1.LooseOffsetForRouting = 0.25D;
-            gViewer1.MouseHitDistance = 0.05D;
-            gViewer1.Name = "gViewer1";
-            gViewer1.NavigationVisible = false;
-            gViewer1.NeedToCalculateLayout = true;
-            gViewer1.OffsetForRelaxingInRouting = 0.6D;
-            gViewer1.PaddingForEdgeRouting = 8D;
-            gViewer1.PanButtonPressed = false;
-            gViewer1.SaveAsImageEnabled = true;
-            gViewer1.SaveAsMsaglEnabled = true;
-            gViewer1.SaveButtonVisible = true;
-            gViewer1.SaveGraphButtonVisible = true;
-            gViewer1.SaveInVectorFormatEnabled = true;
-            gViewer1.Size = new System.Drawing.Size(382, 314);
-            gViewer1.TabIndex = 0;
-            gViewer1.TightOffsetForRouting = 0.125D;
-            gViewer1.ToolBarIsVisible = true;
-            gViewer1.Transform = ((Microsoft.Msagl.Core.Geometry.Curves.PlaneTransformation)(resources.GetObject("gViewer1.Transform")));
-            gViewer1.UndoRedoButtonsVisible = true;
-            gViewer1.WindowZoomButtonPressed = false;
-            gViewer1.ZoomF = 1D;
-            gViewer1.ZoomWindowThreshold = 0.05D;
             // 
             // Title
             // 
@@ -101,11 +61,10 @@
             // 
             // OutputPanel
             // 
-            this.OutputPanel.Controls.Add(gViewer1);
             this.OutputPanel.Location = new System.Drawing.Point(359, 107);
             this.OutputPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.OutputPanel.Name = "OutputPanel";
-            this.OutputPanel.Size = new System.Drawing.Size(382, 314);
+            this.OutputPanel.Size = new System.Drawing.Size(545, 448);
             this.OutputPanel.TabIndex = 1;
             // 
             // OutputLabel
@@ -166,7 +125,7 @@
             this.FileInput.Location = new System.Drawing.Point(34, 208);
             this.FileInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.FileInput.Name = "FileInput";
-            this.FileInput.Size = new System.Drawing.Size(253, 29);
+            this.FileInput.Size = new System.Drawing.Size(271, 29);
             this.FileInput.TabIndex = 6;
             // 
             // OccurenceCheckBox
@@ -224,7 +183,7 @@
             this.SearchButton.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.SearchButton.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.SearchButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.SearchButton.Location = new System.Drawing.Point(34, 361);
+            this.SearchButton.Location = new System.Drawing.Point(34, 416);
             this.SearchButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.SearchButton.Name = "SearchButton";
             this.SearchButton.Size = new System.Drawing.Size(154, 34);
@@ -233,11 +192,46 @@
             this.SearchButton.UseVisualStyleBackColor = false;
             this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
             // 
+            // delaySpeed
+            // 
+            this.delaySpeed.LargeChange = 50;
+            this.delaySpeed.Location = new System.Drawing.Point(76, 366);
+            this.delaySpeed.Maximum = 500;
+            this.delaySpeed.Minimum = 25;
+            this.delaySpeed.Name = "delaySpeed";
+            this.delaySpeed.Size = new System.Drawing.Size(187, 45);
+            this.delaySpeed.SmallChange = 25;
+            this.delaySpeed.TabIndex = 4;
+            this.delaySpeed.TickFrequency = 25;
+            this.delaySpeed.Value = 25;
+            this.delaySpeed.ValueChanged += new System.EventHandler(this.delaySpeed_ValueChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(34, 366);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(36, 15);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Delay";
+            // 
+            // delayLabel
+            // 
+            this.delayLabel.AutoSize = true;
+            this.delayLabel.Location = new System.Drawing.Point(269, 366);
+            this.delayLabel.Name = "delayLabel";
+            this.delayLabel.Size = new System.Drawing.Size(38, 15);
+            this.delayLabel.TabIndex = 14;
+            this.delayLabel.Text = "25 ms";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(781, 504);
+            this.ClientSize = new System.Drawing.Size(916, 566);
+            this.Controls.Add(this.delayLabel);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.delaySpeed);
             this.Controls.Add(this.SearchButton);
             this.Controls.Add(this.DFSButton);
             this.Controls.Add(this.BFSButton);
@@ -254,7 +248,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainForm";
             this.Text = "Folder Crawler";
-            this.OutputPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.delaySpeed)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -275,6 +269,8 @@
         private RadioButton BFSButton;
         private RadioButton DFSButton;
         private Button SearchButton;
-        private Microsoft.Msagl.GraphViewerGdi.GViewer gViewer1;
+        private TrackBar delaySpeed;
+        private Label label1;
+        private Label delayLabel;
     }
 }

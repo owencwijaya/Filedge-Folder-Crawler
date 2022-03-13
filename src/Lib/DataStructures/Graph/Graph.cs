@@ -11,34 +11,22 @@ namespace DirectoryTraversal.Lib.DataStructures.Graph
         public GraphNode(T info) : base(info)
         {
         }
-        public GraphNode(T info, ref LinkedList<Node<T>>? neighbors) : base(info, ref neighbors)
+        public GraphNode(T info, ref LinkedList<Node<T>> neighbors) : base(info, ref neighbors)
         {
         }
     }
 
     public class Graph<T>
     {
-        GraphNode<T> root;
-        public GraphNode<T> Root
+        Node<T> root;
+        public Node<T> Root
         {
             get { return root; }
             set { root = value; }
         }
-        public Graph()
+        public Graph(Node<T> root)
         {
-            GraphNode<int> a = new GraphNode<int>(1);
-        }
-        public void AddNode(ref GraphNode<T> node)
-        {
-
-        }
-        public void AddNode(T info)
-        {
-
-        }
-        public void AddEdge(ref GraphNode<T> from, ref GraphNode<T> to)
-        {
-
+            this.root = root;
         }
     }
 }

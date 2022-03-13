@@ -12,14 +12,20 @@ namespace DirectoryTraversal.Lib
     {
         static ITraversalAlgorithm bfs = new BFS();
         static ITraversalAlgorithm dfs = new DFS();
-        
-        public static void TraverseFromDirectory<T>(string startDirectory, Action<T, T> onEdgeCallback)
-        {
 
+        enum PathType
+        {
+            File,
+            Directory,
         }
 
-        public static void TraverseFromRoot<T>(string root, Action<T, T> onEdgeCallback)
+        internal static void SearchFromDirRecurse(string dir)
         {
+        }
+
+        public static void SearchFromDirectory(string startDirectory, string filename)
+        {
+            
         }
     }
 }

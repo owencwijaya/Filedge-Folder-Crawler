@@ -9,8 +9,8 @@ namespace DirectoryTraversal.Lib.DataStructures.Graph
     public class Node<T>
     {
         T info;
-        LinkedList<Node<T>>? neighbors = null;
-        public LinkedList<Node<T>>? Neighbors
+        LinkedList<Node<T>> neighbors;
+        public LinkedList<Node<T>> Neighbors
         {
             get
             {
@@ -32,9 +32,10 @@ namespace DirectoryTraversal.Lib.DataStructures.Graph
         public Node(T data)
         {
             info = data;
+            neighbors = new LinkedList<Node<T>>();
         }
 
-        public Node(T data, ref LinkedList<Node<T>>? neighbors)
+        public Node(T data, ref LinkedList<Node<T>> neighbors)
         {
             info = data;
             this.neighbors = neighbors;
@@ -42,7 +43,12 @@ namespace DirectoryTraversal.Lib.DataStructures.Graph
 
         public void AddNeighbor(ref Node<T> node)
         {
-            neighbors?.AddLast(node);
+            neighbors.AddLast(node);
+        }
+
+        public bool IsLeaf()
+        {
+            return neighbors.Count == 0;
         }
     }
 }
