@@ -12,6 +12,7 @@ namespace DirectoryTraversal.GUI
         public bool isBFS = false;
         public bool isDFS = false;
         public bool allOccurences = false;
+        public bool running = false;
         public string fileName = "";
 
         // inisialisasi graphViewer, worker, dicts
@@ -50,6 +51,7 @@ namespace DirectoryTraversal.GUI
                         "\nFiles found: " + files.Length.ToString(),
                         "[SUCCESS] Path Identified!"
                         );
+                    DirLabel.Text = "Chosen directory: " + fbd.SelectedPath;
                     path = fbd.SelectedPath;
                 }
                 else
@@ -87,26 +89,38 @@ namespace DirectoryTraversal.GUI
 
         private void SearchButton_Click(object sender, EventArgs e)
         {
-            string alert = "Folder path: " + path + "\nMode: ";
-            if (isBFS)
+            if (!running)
             {
-                alert += "Breadth First Search\n";
-            }
-            if (isDFS)
-            {
-                alert += "Depth First Search\n";
-            }
-            if (allOccurences)
-            {
-                alert += "Check all occurences: ENABLED";
-            }
-            fileName = this.FileInput.Text;
+                string alert = "Folder path: " + path + "\nMode: ";
+                if (isBFS)
+                {
+                    alert += "Breadth First Search\n";
+                }
+                if (isDFS)
+                {
+                    alert += "Depth First Search\n";
+                }
+                if (allOccurences)
+                {
+                    alert += "Check all occurences: ENABLED";
+                }
+                fileName = this.FileInput.Text;
 
-            System.Windows.Forms.MessageBox.Show(
-              alert
-            );
-            //TODO: Deliver to backend around here
-            worker.RunWorkerAsync();
+                System.Windows.Forms.MessageBox.Show(
+                  alert
+                );
+                //TODO: Deliver to backend around here
+                Status.Text = "Searching for file '" + fileName + "'...";
+                running = true;
+                worker.RunWorkerAsync();
+                running = false;
+            } else
+            {
+                System.Windows.Forms.MessageBox.Show(
+                    "You cannot run the search as of now because another search is running!",
+                    "[ALERT] Another process running!");
+            }
+
            
         }
 
@@ -154,7 +168,7 @@ namespace DirectoryTraversal.GUI
             }
         }
 
-        void TraverseDFS(string fromDirectory)
+        void Traverse(string fromDirectory)
         {
             worker.ReportProgress(0, "create");
             isFound = false;
@@ -165,7 +179,15 @@ namespace DirectoryTraversal.GUI
                 dirMain.FullName,
                 dirMain.Name
             ));
-            TraverseDFSRecurse(dirMain.FullName);
+            if (isBFS)
+            {
+                TraverseDFSRecurse(dirMain.FullName);
+            }
+            else
+            {
+                TraverseBFS(dirMain.FullName);
+            }
+
         }
 
         void Worker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
@@ -213,21 +235,12 @@ namespace DirectoryTraversal.GUI
         
         void TraverseBFS(string fromDirectory)
         {
-            worker.ReportProgress(0, "create");
-            isFound = false;
-            idToEdges = new();
-
             DirectoryInfo dirMain = new(fromDirectory);
             Queue<string> q = new Queue<string>();
             List<string> visitedNodes = new List<string>();
 
-            worker.ReportProgress(0, string.Format(
-                "draw|node|{0}|{1}",
-                dirMain.FullName, 
-                dirMain.Name));
-
-            visitedNodes.Add(dirMain.FullName);
-            q.Enqueue(dirMain.FullName);
+            visitedNodes.Add(fromDirectory);
+            q.Enqueue(fromDirectory);
 
             while (q.Count > 0)
             {
@@ -280,24 +293,24 @@ namespace DirectoryTraversal.GUI
                     }
                 }
             }
+            q.Clear();
+            visitedNodes.Clear();
         }
 
         void Worker_DoWork(object? sender, DoWorkEventArgs e)
         {
-            if (isDFS)
-            {
-                TraverseDFS(path);
-            }
-            else
-            {
-                TraverseBFS(path);
-            }
+            Traverse(path);
         }
 
         private void delaySpeed_ValueChanged(object sender, EventArgs e)
         {
             delayLabel.Text = delaySpeed.Value.ToString() + " ms";
             drawDelay = delaySpeed.Value;
+        }
+
+        private void Title_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
