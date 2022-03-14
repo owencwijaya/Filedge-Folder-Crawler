@@ -2,9 +2,11 @@ using System.ComponentModel;
 using Microsoft.Msagl.Drawing;
 using Microsoft.Msagl.GraphViewerGdi;
 using Color = Microsoft.Msagl.Drawing.Color;
+using DirectoryTraversal.Lib.Algorithms;
 
 namespace DirectoryTraversal.GUI
 {
+    
     public partial class MainForm : Form
     {
         // inisialisasi variabel
@@ -19,12 +21,14 @@ namespace DirectoryTraversal.GUI
         Graph graph;
         FileInfo filePathRes;
         bool isFound = false;
-        int drawDelay = 250;
+        int drawDelay = 25;
         GViewer graphViewer = new GViewer();
-        BackgroundWorker worker = new();
+        public static BackgroundWorker worker = new();
         Dictionary<string, Edge> idToEdges;
-        
-     
+
+        DFS TraverseDFS = new();
+        BFS TraverseBFS = new();
+    
         public MainForm()
         {
             InitializeComponent();
@@ -35,6 +39,12 @@ namespace DirectoryTraversal.GUI
             worker.ProgressChanged += new ProgressChangedEventHandler(Worker_ProgressChanged);
             worker.WorkerReportsProgress = true;
             graphViewer.Anchor = (AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
+            TraverseDFS.OnFile = OnFile;
+            TraverseDFS.OnFound = OnFound;
+            TraverseDFS.OnDirectory = OnDirectory;
+            TraverseBFS.OnFile = OnFile;
+            TraverseBFS.OnFound = OnFound;
+            TraverseBFS.OnDirectory = OnDirectory;
         }
 
         private void DirButton_Click(object sender, EventArgs e)
@@ -45,13 +55,13 @@ namespace DirectoryTraversal.GUI
 
                 if (res == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
                 {
-                    string[] files = Directory.GetFiles(fbd.SelectedPath);
-                    MessageBox.Show(files.Aggregate("", (c, n) => c + n + "\n"));
-                    System.Windows.Forms.MessageBox.Show(
-                        "Chosen path: " + fbd.SelectedPath +
-                        "\nFiles found: " + files.Length.ToString(),
-                        "[SUCCESS] Path Identified!"
-                        );
+                    //string[] files = Directory.GetFiles(fbd.SelectedPath);
+                    //MessageBox.Show(files.Aggregate("", (c, n) => c + n + "\n"));
+                    //System.Windows.Forms.MessageBox.Show(
+                    //    "Chosen path: " + fbd.SelectedPath +
+                    //    "\nFiles found: " + files.Length.ToString(),
+                    //    "[SUCCESS] Path Identified!"
+                    //    );
                     DirLabel.Text = "Chosen directory: " + fbd.SelectedPath;
                     path = fbd.SelectedPath;
                 }
@@ -125,49 +135,6 @@ namespace DirectoryTraversal.GUI
            
         }
 
-   
-        void TraverseDFSRecurse(string dirPath)
-        {
-            DirectoryInfo dirMain = new(dirPath);
-            foreach (FileInfo file in dirMain.EnumerateFiles().Reverse())
-            {
-                worker.ReportProgress(0, string.Format(
-                    "draw|node|{0}|{1}", //id pake fullname, nama pake name
-                    file.FullName,
-                    file.Name
-                ));
-                worker.ReportProgress(0, string.Format(
-                    "draw|edge|{0}|{1}",
-                    dirMain.FullName, //from_id dari dirmain, to_id dari fullname
-                    file.FullName
-                ));
-                if (file.Name == fileName)
-                {
-                    isFound = true;
-                    filePathRes = file;
-                    worker.ReportProgress(0, string.Format(
-                        "draw|found|{0}",
-                        file.FullName
-                    ));
-                }
-                Thread.Sleep(drawDelay);
-            }
-            foreach (DirectoryInfo dir in dirMain.EnumerateDirectories().Reverse())
-            {
-                worker.ReportProgress(0, string.Format(
-                    "draw|node|{0}|{1}",
-                    dir.FullName,
-                    dir.Name
-                ));
-                worker.ReportProgress(0, string.Format(
-                    "draw|edge|{0}|{1}",
-                    dirMain.FullName,
-                    dir.FullName
-                ));
-                Thread.Sleep(drawDelay);
-                TraverseDFSRecurse(dir.FullName);
-            }
-        }
 
         void Traverse(string fromDirectory)
         {
@@ -180,13 +147,13 @@ namespace DirectoryTraversal.GUI
                 dirMain.FullName,
                 dirMain.Name
             ));
-            if (isBFS)
+            if (isDFS)
             {
-                TraverseDFSRecurse(dirMain.FullName);
+                TraverseDFS.Traverse(dirMain.FullName, fileName, allOccurences);
             }
-            else
+            else 
             {
-                TraverseBFS(dirMain.FullName);
+                TraverseBFS.Traverse(dirMain.FullName, fileName, allOccurences);
             }
 
         }
@@ -194,13 +161,13 @@ namespace DirectoryTraversal.GUI
         void Worker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
         {
             string[]? s = e.UserState?.ToString()?.Split('|');
+            graphViewer.Graph = null;
             switch (s[0])
             {
                 case "create":
                     graph = new Graph(DateTime.Now.Ticks.ToString());
                     break;
                 case "draw":
-                    graphViewer.Graph = new();
                     if (s[1] == "node") // draw|node|id|label
                     {
                         Node n = graph.AddNode(s[2]);
@@ -213,6 +180,7 @@ namespace DirectoryTraversal.GUI
                         idToEdges[string.Format("{0}|{1}", s[2], s[3])] = edge;
                     } else if (s[1] == "found")
                     {
+                        isFound = true;
                         Node n = graph.FindNode(s[2]);
                         n.Attr.Color = Color.Green;
                         string child = s[2];
@@ -228,76 +196,12 @@ namespace DirectoryTraversal.GUI
                             parent = dir.Parent?.FullName;
                         }
                     }
-                    graphViewer.Graph = graph;
                     break;
             }
+            graphViewer.Graph = graph;
         }
 
-        
-        void TraverseBFS(string fromDirectory)
-        {
-            DirectoryInfo dirMain = new(fromDirectory);
-            Queue<string> q = new Queue<string>();
-            List<string> visitedNodes = new List<string>();
-
-            visitedNodes.Add(fromDirectory);
-            q.Enqueue(fromDirectory);
-
-            while (q.Count > 0)
-            {
-                string deqNode = q.Dequeue();
-                dirMain = new(deqNode);
-                foreach (FileInfo file in dirMain.EnumerateFiles().Reverse())
-                {
-                    if (!visitedNodes.Contains(file.FullName))
-                    {
-                        worker.ReportProgress(0, string.Format(
-                            "draw|node|{0}|{1}", 
-                            file.FullName,
-                            file.Name
-                            ));
-                        worker.ReportProgress(0, string.Format(
-                            "draw|edge|{0}|{1}",
-                            dirMain.FullName, 
-                            file.FullName
-                        ));
-
-                        if (file.Name == fileName)
-                        {
-                            isFound = true;
-                            filePathRes = file;
-                            worker.ReportProgress(0, string.Format(
-                                "draw|found|{0}",
-                                file.FullName
-                            ));
-                        }
-                    }
-                    Thread.Sleep(drawDelay);
-                }
-                foreach (DirectoryInfo dir in dirMain.EnumerateDirectories().Reverse())
-                {
-                    if (!visitedNodes.Contains(dir.FullName))
-                    {
-                        worker.ReportProgress(0, string.Format(
-                             "draw|node|{0}|{1}",
-                             dir.FullName,
-                             dir.Name
-                         ));
-                        worker.ReportProgress(0, string.Format(
-                            "draw|edge|{0}|{1}",
-                            dirMain.FullName,
-                            dir.FullName
-                        ));
-                        Thread.Sleep(drawDelay);
-                        q.Enqueue(dir.FullName);
-                        visitedNodes.Add(dir.FullName);
-                    }
-                }
-            }
-            q.Clear();
-            visitedNodes.Clear();
-        }
-
+       
         void Worker_DoWork(object? sender, DoWorkEventArgs e)
         {
             Traverse(path);
@@ -305,8 +209,44 @@ namespace DirectoryTraversal.GUI
 
         private void delaySpeed_ValueChanged(object sender, EventArgs e)
         {
+            TraverseBFS.DrawDelay = delaySpeed.Value;
+            TraverseDFS.DrawDelay = delaySpeed.Value;
             delayLabel.Text = delaySpeed.Value.ToString() + " ms";
             drawDelay = delaySpeed.Value;
+        }
+
+        void OnFile(FileInfo File){
+            worker.ReportProgress(0, string.Format(
+                "draw|node|{0}|{1}", //id pake fullname, nama pake name
+                File.FullName,
+                File.Name
+            ));
+            
+            worker.ReportProgress(0, string.Format(
+                "draw|edge|{0}|{1}",
+                File.DirectoryName, //from_id dari DirMain, to_id dari fullname
+                File.FullName
+            ));
+        }
+        
+        void OnFound(FileInfo File){
+            worker.ReportProgress(0, string.Format(
+                "draw|found|{0}",
+                File.FullName
+            ));
+        }
+
+        void OnDirectory(DirectoryInfo Directory){
+            worker.ReportProgress(0, string.Format(
+                "draw|node|{0}|{1}",
+                Directory.FullName,
+                Directory.Name
+            ));
+            worker.ReportProgress(0, string.Format(
+                "draw|edge|{0}|{1}",
+                Directory.Parent?.FullName,
+                Directory.FullName
+            ));
         }
     }
 }

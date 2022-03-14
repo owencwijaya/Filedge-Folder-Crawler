@@ -10,8 +10,8 @@ namespace DirectoryTraversal.Lib
     using Algorithms;
     public class DirectoryTraversal
     {
-        static ITraversalAlgorithm bfs = new BFS();
-        static ITraversalAlgorithm dfs = new DFS();
+        // static ITraversalAlgorithm bfs = new BFS();
+        // static ITraversalAlgorithm dfs = new DFS();
 
         enum PathType
         {
@@ -21,6 +21,7 @@ namespace DirectoryTraversal.Lib
 
         internal static void SearchFromDirRecurse(string dir)
         {
+            
         }
 
         public static void SearchFromDirectory(string startDirectory, string filename)
