@@ -30,7 +30,6 @@
         {
             this.Title = new System.Windows.Forms.Label();
             this.OutputPanel = new System.Windows.Forms.Panel();
-            this.OutputLabel = new System.Windows.Forms.Label();
             this.InputLabel = new System.Windows.Forms.Label();
             this.DirectoryLabel = new System.Windows.Forms.Label();
             this.FileLabel = new System.Windows.Forms.Label();
@@ -46,9 +45,8 @@
             this.delayLabel = new System.Windows.Forms.Label();
             this.DirLabel = new System.Windows.Forms.Label();
             this.Status = new System.Windows.Forms.Label();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.OutputLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.delaySpeed)).BeginInit();
-            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // Title
@@ -63,26 +61,16 @@
             this.Title.Size = new System.Drawing.Size(237, 46);
             this.Title.TabIndex = 0;
             this.Title.Text = "Folder Crawler";
-            this.Title.Click += new System.EventHandler(this.Title_Click);
             // 
             // OutputPanel
             // 
-            this.OutputPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.OutputPanel.Location = new System.Drawing.Point(3, 44);
+            this.OutputPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.OutputPanel.Location = new System.Drawing.Point(398, 143);
             this.OutputPanel.Name = "OutputPanel";
-            this.OutputPanel.Size = new System.Drawing.Size(776, 573);
+            this.OutputPanel.Size = new System.Drawing.Size(744, 562);
             this.OutputPanel.TabIndex = 1;
-            // 
-            // OutputLabel
-            // 
-            this.OutputLabel.AutoSize = true;
-            this.flowLayoutPanel1.SetFlowBreak(this.OutputLabel, true);
-            this.OutputLabel.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.OutputLabel.Location = new System.Drawing.Point(3, 0);
-            this.OutputLabel.Name = "OutputLabel";
-            this.OutputLabel.Size = new System.Drawing.Size(113, 41);
-            this.OutputLabel.TabIndex = 2;
-            this.OutputLabel.Text = "Output";
             // 
             // InputLabel
             // 
@@ -243,24 +231,24 @@
             this.Status.TabIndex = 16;
             this.Status.Text = "Waiting for search to begin...";
             // 
-            // flowLayoutPanel1
+            // OutputLabel
             // 
-            this.flowLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanel1.Controls.Add(this.OutputLabel);
-            this.flowLayoutPanel1.Controls.Add(this.OutputPanel);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(383, 83);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(779, 622);
-            this.flowLayoutPanel1.TabIndex = 0;
+            this.OutputLabel.AutoSize = true;
+            this.OutputLabel.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.OutputLabel.Location = new System.Drawing.Point(398, 91);
+            this.OutputLabel.Name = "OutputLabel";
+            this.OutputLabel.Size = new System.Drawing.Size(113, 41);
+            this.OutputLabel.TabIndex = 2;
+            this.OutputLabel.Text = "Output";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1182, 755);
+            this.ClientSize = new System.Drawing.Size(1182, 753);
+            this.Controls.Add(this.OutputLabel);
             this.Controls.Add(this.Title);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.OutputPanel);
             this.Controls.Add(this.Status);
             this.Controls.Add(this.DirLabel);
             this.Controls.Add(this.delayLabel);
@@ -280,8 +268,6 @@
             this.Name = "MainForm";
             this.Text = "Folder Crawler";
             ((System.ComponentModel.ISupportInitialize)(this.delaySpeed)).EndInit();
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -291,7 +277,6 @@
 
         private Label Title;
         private Panel OutputPanel;
-        private Label OutputLabel;
         private Label InputLabel;
         private Label DirectoryLabel;
         private Label FileLabel;
@@ -307,6 +292,6 @@
         private Label delayLabel;
         private Label DirLabel;
         private Label Status;
-        private FlowLayoutPanel flowLayoutPanel1;
+        private Label OutputLabel;
     }
 }

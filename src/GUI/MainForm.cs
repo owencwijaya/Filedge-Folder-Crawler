@@ -20,10 +20,10 @@ namespace DirectoryTraversal.GUI
         FileInfo filePathRes;
         bool isFound = false;
         int drawDelay = 250;
-        GViewer graphViewer = new();
+        GViewer graphViewer = new GViewer();
         BackgroundWorker worker = new();
         Dictionary<string, Edge> idToEdges;
-
+        
      
         public MainForm()
         {
@@ -34,6 +34,7 @@ namespace DirectoryTraversal.GUI
             worker.DoWork += new DoWorkEventHandler(Worker_DoWork);
             worker.ProgressChanged += new ProgressChangedEventHandler(Worker_ProgressChanged);
             worker.WorkerReportsProgress = true;
+            graphViewer.Anchor = (AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
         }
 
         private void DirButton_Click(object sender, EventArgs e)
@@ -306,11 +307,6 @@ namespace DirectoryTraversal.GUI
         {
             delayLabel.Text = delaySpeed.Value.ToString() + " ms";
             drawDelay = delaySpeed.Value;
-        }
-
-        private void Title_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
