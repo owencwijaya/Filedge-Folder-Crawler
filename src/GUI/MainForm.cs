@@ -7,13 +7,23 @@ namespace DirectoryTraversal.GUI
 {
     public partial class MainForm : Form
     {
-
+        // inisialisasi variabel
         public string path = "";
         public bool isBFS = false;
         public bool isDFS = false;
         public bool allOccurences = false;
         public string fileName = "";
 
+        // inisialisasi graphViewer, worker, dicts
+        Graph graph;
+        FileInfo filePathRes;
+        bool isFound = false;
+        int drawDelay = 250;
+        GViewer graphViewer = new();
+        BackgroundWorker worker = new();
+        Dictionary<string, Edge> idToEdges;
+
+     
         public MainForm()
         {
             InitializeComponent();
@@ -25,26 +35,95 @@ namespace DirectoryTraversal.GUI
             worker.WorkerReportsProgress = true;
         }
 
-        Graph graph;
-        FileInfo filePathRes;
-        bool isFound = false;
-        int drawDelay = 250;
-        GViewer graphViewer = new();
-        BackgroundWorker worker = new();
-        Dictionary<string, Edge> idToEdges;
+        private void DirButton_Click(object sender, EventArgs e)
+        {
+            using (var fbd = new FolderBrowserDialog())
+            {
+                DialogResult res = fbd.ShowDialog();
+
+                if (res == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                {
+                    string[] files = Directory.GetFiles(fbd.SelectedPath);
+                    MessageBox.Show(files.Aggregate("", (c, n) => c + n + "\n"));
+                    System.Windows.Forms.MessageBox.Show(
+                        "Chosen path: " + fbd.SelectedPath +
+                        "\nFiles found: " + files.Length.ToString(),
+                        "[SUCCESS] Path Identified!"
+                        );
+                    path = fbd.SelectedPath;
+                }
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show(
+                      "Invalid path! Please try again...",
+                      "[WARNING] Invalid Path!"
+                    );
+                }
+            }
+        }
+
+        private void BFSButton_CheckedChanged(object sender, EventArgs e)
+        {
+            isBFS = true;
+            if (isDFS)
+            {
+                isDFS = false;
+            }
+        }
+
+        private void OccurenceCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            allOccurences = !allOccurences;
+        }
+
+        private void DFSButton_CheckedChanged(object sender, EventArgs e)
+        {
+            isDFS = true;
+            if (isBFS)
+            {
+                isBFS = false;
+            }
+        }
+
+        private void SearchButton_Click(object sender, EventArgs e)
+        {
+            string alert = "Folder path: " + path + "\nMode: ";
+            if (isBFS)
+            {
+                alert += "Breadth First Search\n";
+            }
+            if (isDFS)
+            {
+                alert += "Depth First Search\n";
+            }
+            if (allOccurences)
+            {
+                alert += "Check all occurences: ENABLED";
+            }
+            fileName = this.FileInput.Text;
+
+            System.Windows.Forms.MessageBox.Show(
+              alert
+            );
+            //TODO: Deliver to backend around here
+            worker.RunWorkerAsync();
+           
+        }
+
+   
         void TraverseDFSRecurse(string dirPath)
         {
             DirectoryInfo dirMain = new(dirPath);
             foreach (FileInfo file in dirMain.EnumerateFiles().Reverse())
             {
                 worker.ReportProgress(0, string.Format(
-                    "draw|node|{0}|{1}",
+                    "draw|node|{0}|{1}", //id pake fullname, nama pake name
                     file.FullName,
                     file.Name
                 ));
                 worker.ReportProgress(0, string.Format(
                     "draw|edge|{0}|{1}",
-                    dirMain.FullName,
+                    dirMain.FullName, //from_id dari dirmain, to_id dari fullname
                     file.FullName
                 ));
                 if (file.Name == fileName)
@@ -89,11 +168,6 @@ namespace DirectoryTraversal.GUI
             TraverseDFSRecurse(dirMain.FullName);
         }
 
-        void Worker_DoWork(object? sender, DoWorkEventArgs e)
-        {
-            TraverseDFS(path);
-        }
-
         void Worker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
         {
             string[]? s = e.UserState?.ToString()?.Split('|');
@@ -103,7 +177,7 @@ namespace DirectoryTraversal.GUI
                     graph = new Graph(DateTime.Now.Ticks.ToString());
                     break;
                 case "draw":
-                    graphViewer.Graph = null;
+                    graphViewer.Graph = new();
                     if (s[1] == "node") // draw|node|id|label
                     {
                         Node n = graph.AddNode(s[2]);
@@ -136,79 +210,87 @@ namespace DirectoryTraversal.GUI
             }
         }
 
-        private void DirButton_Click(object sender, EventArgs e)
+        
+        void TraverseBFS(string fromDirectory)
         {
-            using(var fbd = new FolderBrowserDialog())
-            {
-                DialogResult res = fbd.ShowDialog();
+            worker.ReportProgress(0, "create");
+            isFound = false;
+            idToEdges = new();
 
-                if(res == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+            DirectoryInfo dirMain = new(fromDirectory);
+            Queue<string> q = new Queue<string>();
+            List<string> visitedNodes = new List<string>();
+
+            worker.ReportProgress(0, string.Format(
+                "draw|node|{0}|{1}",
+                dirMain.FullName, 
+                dirMain.Name));
+
+            visitedNodes.Add(dirMain.FullName);
+            q.Enqueue(dirMain.FullName);
+
+            while (q.Count > 0)
+            {
+                string deqNode = q.Dequeue();
+                dirMain = new(deqNode);
+                foreach (FileInfo file in dirMain.EnumerateFiles().Reverse())
                 {
-                    string[] files = Directory.GetFiles(fbd.SelectedPath);
-                    MessageBox.Show(files.Aggregate("", (c, n) => c + n + "\n"));
-                    System.Windows.Forms.MessageBox.Show(
-                        "Chosen path: " + fbd.SelectedPath +
-                        "\nFiles found: " + files.Length.ToString(),
-                        "[SUCCESS] Path Identified!"
-                        );
-                    path = fbd.SelectedPath;
-                } 
-                else
+                    if (!visitedNodes.Contains(file.FullName))
+                    {
+                        worker.ReportProgress(0, string.Format(
+                            "draw|node|{0}|{1}", 
+                            file.FullName,
+                            file.Name
+                            ));
+                        worker.ReportProgress(0, string.Format(
+                            "draw|edge|{0}|{1}",
+                            dirMain.FullName, 
+                            file.FullName
+                        ));
+
+                        if (file.Name == fileName)
+                        {
+                            isFound = true;
+                            filePathRes = file;
+                            worker.ReportProgress(0, string.Format(
+                                "draw|found|{0}",
+                                file.FullName
+                            ));
+                        }
+                    }
+                    Thread.Sleep(drawDelay);
+                }
+                foreach (DirectoryInfo dir in dirMain.EnumerateDirectories().Reverse())
                 {
-                   System.Windows.Forms.MessageBox.Show(
-                     "Invalid path! Please try again...",
-                     "[WARNING] Invalid Path!"
-                   );
+                    if (!visitedNodes.Contains(dir.FullName))
+                    {
+                        worker.ReportProgress(0, string.Format(
+                             "draw|node|{0}|{1}",
+                             dir.FullName,
+                             dir.Name
+                         ));
+                        worker.ReportProgress(0, string.Format(
+                            "draw|edge|{0}|{1}",
+                            dirMain.FullName,
+                            dir.FullName
+                        ));
+                        Thread.Sleep(drawDelay);
+                        q.Enqueue(dir.FullName);
+                        visitedNodes.Add(dir.FullName);
+                    }
                 }
             }
         }
 
-        private void BFSButton_CheckedChanged(object sender, EventArgs e)
+        void Worker_DoWork(object? sender, DoWorkEventArgs e)
         {
-            isBFS = true;
             if (isDFS)
             {
-                isDFS = false;
+                TraverseDFS(path);
             }
-        }
-
-        private void OccurenceCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            allOccurences = !allOccurences;
-        }
-
-        private void DFSButton_CheckedChanged(object sender, EventArgs e)
-        {
-            isDFS = true;
-            if (isBFS)
+            else
             {
-                isBFS = false;
-            }
-        }
-        private void SearchButton_Click(object sender, EventArgs e)
-        {
-            string alert = "Folder path: " + path + "\nMode: ";
-            if (isBFS)
-            {
-                alert += "Breadth First Search\n";
-            }
-            if (isDFS)
-            {
-                alert += "Depth First Search\n";
-            }
-            if (allOccurences)
-            {
-                alert += "Check all occurences: ENABLED";
-            }
-            fileName = this.FileInput.Text;
-
-            System.Windows.Forms.MessageBox.Show(
-              alert
-            );
-            //TODO: Deliver to backend around here
-            if (isDFS)
-            {
-                worker.RunWorkerAsync();
+                TraverseBFS(path);
             }
         }
 
