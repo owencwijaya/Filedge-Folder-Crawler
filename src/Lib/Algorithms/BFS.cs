@@ -7,6 +7,7 @@
         public BFS(int DrawDelay = 25)
         {
             this.DrawDelay = DrawDelay;
+            this.isFound = false;
         }
         void TraverseBFS(string DirPath)
         {

@@ -6,31 +6,30 @@
         public DFS(int DrawDelay = 25)
         {
             this.DrawDelay = DrawDelay;
+            this.isFound = false;
         }
         void TraverseDFS(string DirPath)
         {
             DirectoryInfo DirMain = new(DirPath);
-
             foreach (FileInfo File in DirMain.EnumerateFiles().Reverse())
             {
                 OnFile?.Invoke(File);
                 if (File.Name == FileName)
                 {
+                    isFound = true;
                     FileResult.Append(File);
                     OnFound?.Invoke(File);
-                    if (!AllOccurences)
-                    {
-                        return;
-                    }
                 }
                 Thread.Sleep(DrawDelay);
             }
-
-            foreach (DirectoryInfo Directory in DirMain.EnumerateDirectories().Reverse())
+            if (AllOccurences || (!isFound && !AllOccurences))
             {
-                OnDirectory?.Invoke(Directory);
-                Thread.Sleep(DrawDelay);
-                TraverseDFS(Directory.FullName);
+                foreach (DirectoryInfo Directory in DirMain.EnumerateDirectories().Reverse())
+                {
+                    OnDirectory?.Invoke(Directory);
+                    Thread.Sleep(DrawDelay);
+                    TraverseDFS(Directory.FullName);
+                }
             }
         }
 
@@ -39,6 +38,7 @@
             this.FileName = FileName;
             AllOccurences = AllOccurance;
             FileResult.Clear();
+            this.isFound = false;
             TraverseDFS(DirPath);
         }
     }

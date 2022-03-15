@@ -15,6 +15,7 @@ namespace DirectoryTraversal.Lib.Algorithms
         public string? FileName { get; set; }
         public List<FileInfo> FileResult = new();
         public int DrawDelay { get; set; }
+        public bool isFound { get; set; }
         internal bool AllOccurences { get; set; }
     }
     public interface ITraversable
