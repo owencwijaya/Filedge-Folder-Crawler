@@ -26,7 +26,15 @@
                         {
                             FileResult.Append(File);
                             OnFound?.Invoke(File);
+                            if (!AllOccurences)
+                            {
+                                Q.Clear();
+                                VisitedNodes.Clear();
+                                return;
+
+                            }
                         }
+
                     }
                     Thread.Sleep(DrawDelay);
                 }

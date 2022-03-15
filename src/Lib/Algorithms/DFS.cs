@@ -18,6 +18,10 @@
                 {
                     FileResult.Append(File);
                     OnFound?.Invoke(File);
+                    if (!AllOccurences)
+                    {
+                        return;
+                    }
                 }
                 Thread.Sleep(DrawDelay);
             }

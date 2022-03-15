@@ -3,6 +3,7 @@ using Microsoft.Msagl.Drawing;
 using Microsoft.Msagl.GraphViewerGdi;
 using Color = Microsoft.Msagl.Drawing.Color;
 using DirectoryTraversal.Lib.Algorithms;
+using System.Diagnostics;
 
 namespace DirectoryTraversal.GUI
 {
@@ -11,12 +12,12 @@ namespace DirectoryTraversal.GUI
     {
         // inisialisasi variabel
         public string path = "";
-        public bool isBFS = false;
+        public bool isBFS = true;
         public bool isDFS = false;
         public bool allOccurences = false;
         public bool running = false;
         public string fileName = "";
-
+        List<string> foundPaths = new List<string>();
         // inisialisasi graphViewer, worker, dicts
         Graph graph;
         FileInfo filePathRes;
@@ -25,6 +26,7 @@ namespace DirectoryTraversal.GUI
         GViewer graphViewer = new GViewer();
         public static BackgroundWorker worker = new();
         Dictionary<string, Edge> idToEdges;
+        Stopwatch sw = new Stopwatch();
 
         DFS TraverseDFS = new();
         BFS TraverseBFS = new();
@@ -37,6 +39,7 @@ namespace DirectoryTraversal.GUI
             OutputPanel.ResumeLayout();
             worker.DoWork += new DoWorkEventHandler(Worker_DoWork);
             worker.ProgressChanged += new ProgressChangedEventHandler(Worker_ProgressChanged);
+            worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Worker_CalculateTime);
             worker.WorkerReportsProgress = true;
             graphViewer.Anchor = (AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
             TraverseDFS.OnFile = OnFile;
@@ -55,14 +58,7 @@ namespace DirectoryTraversal.GUI
 
                 if (res == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
                 {
-                    //string[] files = Directory.GetFiles(fbd.SelectedPath);
-                    //MessageBox.Show(files.Aggregate("", (c, n) => c + n + "\n"));
-                    //System.Windows.Forms.MessageBox.Show(
-                    //    "Chosen path: " + fbd.SelectedPath +
-                    //    "\nFiles found: " + files.Length.ToString(),
-                    //    "[SUCCESS] Path Identified!"
-                    //    );
-                    DirLabel.Text = "Chosen directory: " + fbd.SelectedPath;
+                    DirLabel.Text = "Starting directory: " + fbd.SelectedPath;
                     path = fbd.SelectedPath;
                 }
                 else
@@ -75,6 +71,13 @@ namespace DirectoryTraversal.GUI
             }
         }
 
+        private void FileInput_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                SearchButton_Click(sender, e);
+            }
+        }
         private void BFSButton_CheckedChanged(object sender, EventArgs e)
         {
             isBFS = true;
@@ -102,6 +105,22 @@ namespace DirectoryTraversal.GUI
         {
             if (!running)
             {
+                string initialAlert = "";
+                if (path.Length == 0)
+                {
+                    initialAlert += "Please select a starting directory!";
+                }
+                if (this.FileInput.Text.Length == 0)
+                {
+                    initialAlert += "\nPlease enter a file name!";
+                }
+
+                if (initialAlert.Length != 0)
+                {
+                    System.Windows.Forms.MessageBox.Show(initialAlert,
+                        "[ALERT] Incomplete Data");
+                    return;
+                }
                 string alert = "Folder path: " + path + "\nMode: ";
                 if (isBFS)
                 {
@@ -122,17 +141,15 @@ namespace DirectoryTraversal.GUI
                 );
                 //TODO: Deliver to backend around here
                 Status.Text = "Searching for file '" + fileName + "'...";
-                running = true;
+
                 worker.RunWorkerAsync();
-                running = false;
-            } else
+            } 
+            else
             {
                 System.Windows.Forms.MessageBox.Show(
-                    "You cannot run the search as of now because another search is running!",
+                    "You cannot run a new search now because your previous search is running!",
                     "[ALERT] Another process running!");
-            }
-
-           
+            }           
         }
 
 
@@ -204,7 +221,33 @@ namespace DirectoryTraversal.GUI
        
         void Worker_DoWork(object? sender, DoWorkEventArgs e)
         {
+            sw.Reset();
+            sw.Start();
+            running = true;
             Traverse(path);
+            running = false;
+        }
+
+        void Worker_CalculateTime(object? sender, RunWorkerCompletedEventArgs e)
+        {
+            sw.Stop();
+            Status.Text = "Elapsed time (animation included): " + sw.ElapsedMilliseconds + " ms\n";
+            if (foundPaths.Count != 0)
+            {
+                if (foundPaths.Count > 1)
+                {
+                    Status.Text += "Multiple files with same name found: \n";
+                }
+                foreach (string path in foundPaths)
+                {
+                    Status.Text += "- " + path + "\n";
+                }
+            } 
+            else
+            {
+                Status.Text += "\nFile " + fileName + " not found...";
+            }
+            foundPaths.Clear();
         }
 
         private void delaySpeed_ValueChanged(object sender, EventArgs e)
@@ -234,6 +277,7 @@ namespace DirectoryTraversal.GUI
                 "draw|found|{0}",
                 File.FullName
             ));
+            foundPaths.Add(File.FullName);
         }
 
         void OnDirectory(DirectoryInfo Directory){
