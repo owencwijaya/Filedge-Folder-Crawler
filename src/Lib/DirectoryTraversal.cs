@@ -2,31 +2,76 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-
+using System.Threading.Tasks; 
 
 namespace DirectoryTraversal.Lib
 {
     using Algorithms;
     public class DirectoryTraversal
     {
-        // static ITraversalAlgorithm bfs = new BFS();
-        // static ITraversalAlgorithm dfs = new DFS();
+        public DFS TraverseDFS;
+        public BFS TraverseBFS;
 
-        enum PathType
+        public DirectoryTraversal()
         {
-            File,
-            Directory,
+            TraverseBFS = new();
+            TraverseDFS = new();
+        }
+        public Action<FileInfo>? OnFile
+        {
+            get 
+            {
+                return TraverseDFS.OnFile; 
+            }
+            set 
+            { 
+                TraverseDFS.OnFile = value; 
+                TraverseBFS.OnFile = value; 
+            }
         }
 
-        internal static void SearchFromDirRecurse(string dir)
+        public Action<DirectoryInfo>? OnDirectory
         {
-            
+            get 
+            { 
+                return TraverseDFS.OnDirectory; 
+            }
+            set 
+            { 
+                TraverseDFS.OnDirectory = value; 
+                TraverseBFS.OnDirectory = value; 
+            }
+
         }
 
-        public static void SearchFromDirectory(string startDirectory, string filename)
+        public Action<FileInfo>? OnFound
         {
-            
+            get 
+            { 
+                return TraverseDFS.OnFound;
+            }
+            set 
+            { 
+                TraverseDFS.OnFound = value;
+                TraverseBFS.OnFound = value;
+            }
         }
+
+   
+        public int DrawDelay 
+        { 
+            get
+            {
+                return TraverseBFS.DrawDelay;
+            }
+            set
+            {
+                TraverseBFS.DrawDelay = value;
+                TraverseDFS.DrawDelay = value;
+            }
+        }
+        
+        
+
     }
 }

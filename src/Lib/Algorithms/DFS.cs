@@ -50,7 +50,6 @@
             this.FileName = FileName;
             AllOccurences = AllOccurance;
             FileResult.Clear();
-            this.isFound = false;
             TraverseDFS(DirPath);
         }
     }

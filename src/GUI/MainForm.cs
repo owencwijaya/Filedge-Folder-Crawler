@@ -3,11 +3,12 @@ using Microsoft.Msagl.Drawing;
 using Microsoft.Msagl.GraphViewerGdi;
 using Color = Microsoft.Msagl.Drawing.Color;
 using DirectoryTraversal.Lib.Algorithms;
+
 using System.Diagnostics;
 
 namespace DirectoryTraversal.GUI
 {
-    
+    using DirectoryTraversal.Lib;
     public partial class MainForm : Form
     {
         // inisialisasi variabel
@@ -27,9 +28,7 @@ namespace DirectoryTraversal.GUI
         public static BackgroundWorker worker = new();
         Dictionary<string, Edge> idToEdges;
         Stopwatch sw = new Stopwatch();
-
-        DFS TraverseDFS = new();
-        BFS TraverseBFS = new();
+        DirectoryTraversal Traverser = new();
     
         public MainForm()
         {
@@ -42,12 +41,9 @@ namespace DirectoryTraversal.GUI
             worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Worker_CalculateTime);
             worker.WorkerReportsProgress = true;
             graphViewer.Anchor = (AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
-            TraverseDFS.OnFile = OnFile;
-            TraverseDFS.OnFound = OnFound;
-            TraverseDFS.OnDirectory = OnDirectory;
-            TraverseBFS.OnFile = OnFile;
-            TraverseBFS.OnFound = OnFound;
-            TraverseBFS.OnDirectory = OnDirectory;
+            Traverser.OnFile = OnFile;
+            Traverser.OnFound = OnFound;
+            Traverser.OnDirectory = OnDirectory;
         }
 
         private void DirButton_Click(object sender, EventArgs e)
@@ -166,11 +162,11 @@ namespace DirectoryTraversal.GUI
             ));
             if (isDFS)
             {
-                TraverseDFS.Traverse(dirMain.FullName, fileName, allOccurences);
+                Traverser.TraverseDFS.Traverse(dirMain.FullName, fileName, allOccurences);
             }
             else 
             {
-                TraverseBFS.Traverse(dirMain.FullName, fileName, allOccurences);
+                Traverser.TraverseBFS.Traverse(dirMain.FullName, fileName, allOccurences);
             }
 
         }
@@ -252,8 +248,7 @@ namespace DirectoryTraversal.GUI
 
         private void delaySpeed_ValueChanged(object sender, EventArgs e)
         {
-            TraverseBFS.DrawDelay = delaySpeed.Value;
-            TraverseDFS.DrawDelay = delaySpeed.Value;
+            Traverser.DrawDelay = delaySpeed.Value;
             delayLabel.Text = delaySpeed.Value.ToString() + " ms";
             drawDelay = delaySpeed.Value;
         }
