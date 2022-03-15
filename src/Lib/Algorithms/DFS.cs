@@ -13,6 +13,10 @@
             DirectoryInfo DirMain = new(DirPath);
             foreach (FileInfo File in DirMain.EnumerateFiles().Reverse())
             {
+                if (!AllOccurences && isFound)
+                {
+                    return;
+                }
                 OnFile?.Invoke(File);
                 if (File.Name == FileName)
                 {
@@ -22,15 +26,23 @@
                 }
                 Thread.Sleep(DrawDelay);
             }
-            if (AllOccurences || (!isFound && !AllOccurences))
+
+            foreach (DirectoryInfo Directory in DirMain.EnumerateDirectories().Reverse())
             {
-                foreach (DirectoryInfo Directory in DirMain.EnumerateDirectories().Reverse())
+                if (!AllOccurences && isFound)
                 {
-                    OnDirectory?.Invoke(Directory);
-                    Thread.Sleep(DrawDelay);
+                    return;
+                }
+
+                OnDirectory?.Invoke(Directory);
+                Thread.Sleep(DrawDelay);
+
+                if (AllOccurences || (!isFound && !AllOccurences))
+                {
                     TraverseDFS(Directory.FullName);
                 }
             }
+            
         }
 
         public void Traverse(string DirPath, string FileName, bool AllOccurance)
