@@ -10,6 +10,7 @@
         }
         void TraverseDFS(string DirPath)
         {
+
             DirectoryInfo DirMain = new(DirPath);
             foreach (FileInfo File in DirMain.EnumerateFiles().Reverse())
             {
@@ -50,6 +51,7 @@
             this.FileName = FileName;
             AllOccurences = AllOccurance;
             FileResult.Clear();
+            isFound = false;
             TraverseDFS(DirPath);
         }
     }

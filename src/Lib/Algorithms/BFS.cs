@@ -11,6 +11,8 @@
         }
         void TraverseBFS(string DirPath)
         {
+            Q.Clear();
+            VisitedNodes.Clear();
             VisitedNodes[DirPath] = true;
             Q.Enqueue(DirPath);
 
@@ -49,8 +51,6 @@
                     }
                 }
             }
-            Q.Clear();
-            VisitedNodes.Clear();
         }
         public void Traverse(string DirPath, string FileName, bool AllOccurance)
         {

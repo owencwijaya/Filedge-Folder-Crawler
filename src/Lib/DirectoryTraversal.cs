@@ -63,11 +63,11 @@ namespace DirectoryTraversal.Lib
         
         public void Traverse(string DirPath, string FileName, bool AllOccurances, Algorithm Algo)
         {
-            if (Algo == Algorithm.DFS)
+            if (Algo == Algorithm.BFS)
             {
                 TraverseBFS.Traverse(DirPath, FileName, AllOccurances);
             } 
-            else if(Algo == Algorithm.BFS)
+            else if(Algo == Algorithm.DFS)
             {
                 TraverseDFS.Traverse(DirPath, FileName, AllOccurances);
             }

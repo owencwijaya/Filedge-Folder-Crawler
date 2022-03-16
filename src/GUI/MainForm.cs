@@ -40,6 +40,8 @@ namespace DirectoryTraversal.GUI
             worker.ProgressChanged += new ProgressChangedEventHandler(Worker_ProgressChanged);
             worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Worker_CalculateTime);
             worker.WorkerReportsProgress = true;
+            graphViewer.Size = new Size(1240, 600);
+            graphViewer.AutoSize = true;
             graphViewer.Anchor = (AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
             Traverser.OnFile = OnFile;
             Traverser.OnFound = OnFound;
@@ -54,7 +56,7 @@ namespace DirectoryTraversal.GUI
 
                 if (res == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
                 {
-                    DirLabel.Text = "Starting directory: " + fbd.SelectedPath;
+                    DirLabel.Text = "Starting directory:\n" + fbd.SelectedPath;
                     path = fbd.SelectedPath;
                 }
                 else
@@ -286,6 +288,11 @@ namespace DirectoryTraversal.GUI
                 Directory.Parent?.FullName,
                 Directory.FullName
             ));
+        }
+
+        private void FileInput_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
