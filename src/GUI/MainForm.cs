@@ -162,11 +162,11 @@ namespace DirectoryTraversal.GUI
             ));
             if (isDFS)
             {
-                Traverser.TraverseDFS.Traverse(dirMain.FullName, fileName, allOccurences);
+                Traverser.Traverse(dirMain.FullName, fileName, allOccurences, Algorithm.DFS);
             }
             else 
             {
-                Traverser.TraverseBFS.Traverse(dirMain.FullName, fileName, allOccurences);
+                Traverser.Traverse(dirMain.FullName, fileName, allOccurences, Algorithm.BFS);
             }
 
         }

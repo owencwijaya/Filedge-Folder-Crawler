@@ -7,22 +7,24 @@ using System.Threading.Tasks;
 namespace DirectoryTraversal.Lib
 {
     using Algorithms;
+
+    public enum Algorithm
+    {
+        DFS,
+        BFS
+    }
     public class DirectoryTraversal
     {
-        public DFS TraverseDFS;
-        public BFS TraverseBFS;
+        private static BFS TraverseBFS;
+        private static DFS TraverseDFS;
 
         public DirectoryTraversal()
         {
-            TraverseBFS = new();
-            TraverseDFS = new();
+            TraverseBFS = new BFS();
+            TraverseDFS = new DFS();
         }
         public Action<FileInfo>? OnFile
         {
-            get 
-            {
-                return TraverseDFS.OnFile; 
-            }
             set 
             { 
                 TraverseDFS.OnFile = value; 
@@ -32,10 +34,6 @@ namespace DirectoryTraversal.Lib
 
         public Action<DirectoryInfo>? OnDirectory
         {
-            get 
-            { 
-                return TraverseDFS.OnDirectory; 
-            }
             set 
             { 
                 TraverseDFS.OnDirectory = value; 
@@ -46,10 +44,6 @@ namespace DirectoryTraversal.Lib
 
         public Action<FileInfo>? OnFound
         {
-            get 
-            { 
-                return TraverseDFS.OnFound;
-            }
             set 
             { 
                 TraverseDFS.OnFound = value;
@@ -59,11 +53,7 @@ namespace DirectoryTraversal.Lib
 
    
         public int DrawDelay 
-        { 
-            get
-            {
-                return TraverseBFS.DrawDelay;
-            }
+        {
             set
             {
                 TraverseBFS.DrawDelay = value;
@@ -71,7 +61,17 @@ namespace DirectoryTraversal.Lib
             }
         }
         
-        
+        public void Traverse(string DirPath, string FileName, bool AllOccurances, Algorithm Algo)
+        {
+            if (Algo == Algorithm.DFS)
+            {
+                TraverseBFS.Traverse(DirPath, FileName, AllOccurances);
+            } 
+            else if(Algo == Algorithm.BFS)
+            {
+                TraverseDFS.Traverse(DirPath, FileName, AllOccurances);
+            }
+        }
 
     }
 }

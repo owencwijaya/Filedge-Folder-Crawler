@@ -1,6 +1,6 @@
 ﻿namespace DirectoryTraversal.Lib.Algorithms
 {
-    public class DFS : TraversalAlgorithm, ITraversable
+    internal class DFS : TraversalAlgorithm, ITraversable
     {
         
         public DFS(int DrawDelay = 25)

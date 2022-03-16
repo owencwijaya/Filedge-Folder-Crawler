@@ -1,6 +1,6 @@
 ﻿namespace DirectoryTraversal.Lib.Algorithms
 {
-    public class BFS : TraversalAlgorithm, ITraversable
+    internal class BFS : TraversalAlgorithm, ITraversable
     {
         Queue<string> Q = new();
         Dictionary<string, bool> VisitedNodes = new();
