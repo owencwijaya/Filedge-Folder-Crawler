@@ -131,10 +131,6 @@ namespace DirectoryTraversal.GUI
             UpdateStatus1?.Invoke("Elapsed time (animation included): " + sw.ElapsedMilliseconds + " ms\n");
             if (foundPaths.Count != 0)
             {
-                if (foundPaths.Count > 1)
-                {
-                    UpdateStatus2?.Invoke("Multiple files with same name found: \n");
-                }
                 foreach (string path in foundPaths)
                 {
                     UpdateStatus2?.Invoke(path);

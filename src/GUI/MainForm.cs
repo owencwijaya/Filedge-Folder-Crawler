@@ -136,7 +136,10 @@ namespace DirectoryTraversal.GUI
                 MessageBox.Show(
                   alert
                 );
-
+                foreach(Control c in RTF.Controls)
+                {
+                    RTF.Controls.Remove(c);
+                }
                 Status.Text = "Searching for file '" + Drawer.fileName + "'...";
 
                 // Start Drawing Travesal Graph
@@ -157,11 +160,6 @@ namespace DirectoryTraversal.GUI
             Drawer.drawDelay = delaySpeed.Value;
         }
 
-        private void FileInput_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
 
         // Method Updater
         void UpdateGraph(Graph graph)
@@ -176,17 +174,18 @@ namespace DirectoryTraversal.GUI
 
         void UpdateStatus2(String text)
         {
-            RTF.Text += "<a href='file:////" + text + "'>" + text + "</a>";
-            RTF.Text += "\n";
-        }
-        private void Status_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void DirectoryLabel_Click(object sender, EventArgs e)
-        {
-
+            LinkLabel link = new LinkLabel();
+            link.Text = text;
+            LinkLabel.Link data = new LinkLabel.Link();
+            data.LinkData = text;
+            link.Links.Add(data);
+            link.MaximumSize = new Size(RTF.Width, 200);
+            link.AutoSize = true;
+            link.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(
+                (sender, e) => Process.Start(Environment.GetEnvironmentVariable("WINDIR") + @"\explorer.exe",
+                @text.Remove(text.LastIndexOf('\\'))));
+            RTF.Controls.Add(link);
+   
         }
 
         private void DarkMode_Click(object sender, EventArgs e)
@@ -201,5 +200,6 @@ namespace DirectoryTraversal.GUI
                 DarkMode.Text = "🌞";
             }
         }
+
     }
 }

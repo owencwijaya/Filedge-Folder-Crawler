@@ -44,7 +44,7 @@
             this.DirButton = new MaterialSkin.Controls.MaterialButton();
             this.SearchButton = new MaterialSkin.Controls.MaterialButton();
             this.DarkMode = new MaterialSkin.Controls.MaterialButton();
-            this.RTF = new System.Windows.Forms.RichTextBox();
+            this.RTF = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.delaySpeed)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,7 +69,6 @@
             this.DirectoryLabel.Size = new System.Drawing.Size(233, 25);
             this.DirectoryLabel.TabIndex = 0;
             this.DirectoryLabel.Text = "Choose Starting Directory";
-            this.DirectoryLabel.Click += new System.EventHandler(this.DirectoryLabel_Click);
             // 
             // FileLabel
             // 
@@ -89,7 +88,6 @@
             this.FileInput.Name = "FileInput";
             this.FileInput.Size = new System.Drawing.Size(188, 34);
             this.FileInput.TabIndex = 6;
-            this.FileInput.TextChanged += new System.EventHandler(this.FileInput_TextChanged);
             this.FileInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FileInput_KeyDown);
             // 
             // OccurenceCheckBox
@@ -187,9 +185,9 @@
             this.DirLabel.Location = new System.Drawing.Point(35, 185);
             this.DirLabel.MaximumSize = new System.Drawing.Size(450, 150);
             this.DirLabel.Name = "DirLabel";
-            this.DirLabel.Size = new System.Drawing.Size(114, 17);
+            this.DirLabel.Size = new System.Drawing.Size(112, 17);
             this.DirLabel.TabIndex = 15;
-            this.DirLabel.Text = "Chosen directory: ";
+            this.DirLabel.Text = "Starting directory:";
             // 
             // Status
             // 
@@ -200,7 +198,6 @@
             this.Status.Size = new System.Drawing.Size(176, 17);
             this.Status.TabIndex = 16;
             this.Status.Text = "Waiting for search to begin...";
-            this.Status.Click += new System.EventHandler(this.Status_Click);
             // 
             // DirButton
             // 
@@ -265,12 +262,11 @@
             // 
             // RTF
             // 
-            this.RTF.Location = new System.Drawing.Point(586, 213);
+            this.RTF.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.RTF.Location = new System.Drawing.Point(585, 208);
             this.RTF.Name = "RTF";
-            this.RTF.Size = new System.Drawing.Size(490, 107);
+            this.RTF.Size = new System.Drawing.Size(750, 125);
             this.RTF.TabIndex = 20;
-            this.RTF.Text = "";
-            this.RTF.DetectUrls = true;
             // 
             // MainForm
             // 
@@ -322,6 +318,6 @@
         private MaterialSkin.Controls.MaterialButton DirButton;
         private MaterialSkin.Controls.MaterialButton SearchButton;
         private MaterialSkin.Controls.MaterialButton DarkMode;
-        private RichTextBox RTF;
+        private FlowLayoutPanel RTF;
     }
 }
