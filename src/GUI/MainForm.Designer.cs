@@ -28,25 +28,154 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.OutputPanel = new System.Windows.Forms.Panel();
-            this.DirectoryLabel = new System.Windows.Forms.Label();
-            this.FileLabel = new System.Windows.Forms.Label();
-            this.FileInput = new System.Windows.Forms.TextBox();
-            this.OccurenceCheckBox = new System.Windows.Forms.CheckBox();
-            this.MethodLabel = new System.Windows.Forms.Label();
-            this.BFSButton = new System.Windows.Forms.RadioButton();
-            this.DFSButton = new System.Windows.Forms.RadioButton();
-            this.delaySpeed = new System.Windows.Forms.TrackBar();
-            this.label1 = new System.Windows.Forms.Label();
-            this.delayLabel = new System.Windows.Forms.Label();
-            this.DirLabel = new System.Windows.Forms.Label();
-            this.Status = new System.Windows.Forms.Label();
-            this.DirButton = new MaterialSkin.Controls.MaterialButton();
-            this.SearchButton = new MaterialSkin.Controls.MaterialButton();
-            this.DarkMode = new MaterialSkin.Controls.MaterialButton();
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.materialLabel7 = new MaterialSkin.Controls.MaterialLabel();
+            this.LabelResult = new MaterialSkin.Controls.MaterialLabel();
+            this.materialCard5 = new MaterialSkin.Controls.MaterialCard();
+            this.Status = new MaterialSkin.Controls.MaterialLabel();
             this.RTF = new System.Windows.Forms.FlowLayoutPanel();
-            ((System.ComponentModel.ISupportInitialize)(this.delaySpeed)).BeginInit();
+            this.OutputPanel = new System.Windows.Forms.Panel();
+            this.materialCard4 = new MaterialSkin.Controls.MaterialCard();
+            this.delaySpeed = new MaterialSkin.Controls.MaterialSlider();
+            this.LabelDrawingDelay = new MaterialSkin.Controls.MaterialLabel();
+            this.SearchButton = new MaterialSkin.Controls.MaterialButton();
+            this.materialCard3 = new MaterialSkin.Controls.MaterialCard();
+            this.DFSButton = new MaterialSkin.Controls.MaterialRadioButton();
+            this.BFSButton = new MaterialSkin.Controls.MaterialRadioButton();
+            this.LabelSearchMethod = new MaterialSkin.Controls.MaterialLabel();
+            this.materialCard2 = new MaterialSkin.Controls.MaterialCard();
+            this.LabelInputFileName = new MaterialSkin.Controls.MaterialLabel();
+            this.OccurenceCheckBox = new MaterialSkin.Controls.MaterialCheckbox();
+            this.FileInput = new MaterialSkin.Controls.MaterialTextBox2();
+            this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
+            this.DirLabel = new MaterialSkin.Controls.MaterialLabel();
+            this.LabelDirectory = new MaterialSkin.Controls.MaterialLabel();
+            this.DirButton = new MaterialSkin.Controls.MaterialButton();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialCard6 = new MaterialSkin.Controls.MaterialCard();
+            this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.materialCard7 = new MaterialSkin.Controls.MaterialCard();
+            this.materialSwitch1 = new MaterialSkin.Controls.MaterialSwitch();
+            this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.SelectedDir = new MaterialSkin.Controls.MaterialLabel();
+            this.materialTabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.materialCard5.SuspendLayout();
+            this.materialCard4.SuspendLayout();
+            this.materialCard3.SuspendLayout();
+            this.materialCard2.SuspendLayout();
+            this.materialCard1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.materialCard6.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.materialCard7.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // materialTabControl1
+            // 
+            this.materialTabControl1.Controls.Add(this.tabPage1);
+            this.materialTabControl1.Controls.Add(this.tabPage2);
+            this.materialTabControl1.Controls.Add(this.tabPage3);
+            this.materialTabControl1.Depth = 0;
+            this.materialTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.materialTabControl1.ImageList = this.imageList1;
+            this.materialTabControl1.Location = new System.Drawing.Point(3, 64);
+            this.materialTabControl1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialTabControl1.Multiline = true;
+            this.materialTabControl1.Name = "materialTabControl1";
+            this.materialTabControl1.SelectedIndex = 0;
+            this.materialTabControl1.Size = new System.Drawing.Size(1394, 713);
+            this.materialTabControl1.TabIndex = 0;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.materialLabel7);
+            this.tabPage1.Controls.Add(this.LabelResult);
+            this.tabPage1.Controls.Add(this.materialCard5);
+            this.tabPage1.Controls.Add(this.materialCard4);
+            this.tabPage1.Controls.Add(this.materialCard3);
+            this.tabPage1.Controls.Add(this.materialCard2);
+            this.tabPage1.Controls.Add(this.materialCard1);
+            this.tabPage1.ImageKey = "home.png";
+            this.tabPage1.Location = new System.Drawing.Point(4, 39);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1386, 670);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Home";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // materialLabel7
+            // 
+            this.materialLabel7.AutoSize = true;
+            this.materialLabel7.BackColor = System.Drawing.Color.Transparent;
+            this.materialLabel7.Depth = 0;
+            this.materialLabel7.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel7.Location = new System.Drawing.Point(15, 12);
+            this.materialLabel7.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel7.Name = "materialLabel7";
+            this.materialLabel7.Size = new System.Drawing.Size(124, 19);
+            this.materialLabel7.TabIndex = 44;
+            this.materialLabel7.Text = "Information Input";
+            // 
+            // LabelResult
+            // 
+            this.LabelResult.AutoSize = true;
+            this.LabelResult.Depth = 0;
+            this.LabelResult.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.LabelResult.Location = new System.Drawing.Point(11, 204);
+            this.LabelResult.MouseState = MaterialSkin.MouseState.HOVER;
+            this.LabelResult.Name = "LabelResult";
+            this.LabelResult.Size = new System.Drawing.Size(45, 19);
+            this.LabelResult.TabIndex = 43;
+            this.LabelResult.Text = "Result";
+            // 
+            // materialCard5
+            // 
+            this.materialCard5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.materialCard5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCard5.Controls.Add(this.Status);
+            this.materialCard5.Controls.Add(this.RTF);
+            this.materialCard5.Controls.Add(this.OutputPanel);
+            this.materialCard5.Depth = 0;
+            this.materialCard5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialCard5.Location = new System.Drawing.Point(11, 237);
+            this.materialCard5.Margin = new System.Windows.Forms.Padding(14);
+            this.materialCard5.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCard5.Name = "materialCard5";
+            this.materialCard5.Padding = new System.Windows.Forms.Padding(14);
+            this.materialCard5.Size = new System.Drawing.Size(1358, 419);
+            this.materialCard5.TabIndex = 43;
+            // 
+            // Status
+            // 
+            this.Status.AutoSize = true;
+            this.Status.Depth = 0;
+            this.Status.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.Status.Location = new System.Drawing.Point(17, 14);
+            this.Status.MouseState = MaterialSkin.MouseState.HOVER;
+            this.Status.Name = "Status";
+            this.Status.Size = new System.Drawing.Size(203, 19);
+            this.Status.TabIndex = 42;
+            this.Status.Text = "Waiting for search to begin...";
+            // 
+            // RTF
+            // 
+            this.RTF.Location = new System.Drawing.Point(17, 48);
+            this.RTF.Name = "RTF";
+            this.RTF.Size = new System.Drawing.Size(687, 57);
+            this.RTF.TabIndex = 37;
             // 
             // OutputPanel
             // 
@@ -54,170 +183,54 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.OutputPanel.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.OutputPanel.Location = new System.Drawing.Point(35, 339);
+            this.OutputPanel.Location = new System.Drawing.Point(17, 125);
             this.OutputPanel.Name = "OutputPanel";
-            this.OutputPanel.Size = new System.Drawing.Size(1300, 400);
-            this.OutputPanel.TabIndex = 1;
+            this.OutputPanel.Size = new System.Drawing.Size(1324, 277);
+            this.OutputPanel.TabIndex = 22;
             // 
-            // DirectoryLabel
+            // materialCard4
             // 
-            this.DirectoryLabel.AutoSize = true;
-            this.DirectoryLabel.BackColor = System.Drawing.Color.Transparent;
-            this.DirectoryLabel.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.DirectoryLabel.Location = new System.Drawing.Point(35, 84);
-            this.DirectoryLabel.Name = "DirectoryLabel";
-            this.DirectoryLabel.Size = new System.Drawing.Size(233, 25);
-            this.DirectoryLabel.TabIndex = 0;
-            this.DirectoryLabel.Text = "Choose Starting Directory";
-            // 
-            // FileLabel
-            // 
-            this.FileLabel.AutoSize = true;
-            this.FileLabel.BackColor = System.Drawing.Color.Transparent;
-            this.FileLabel.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.FileLabel.Location = new System.Drawing.Point(300, 84);
-            this.FileLabel.Name = "FileLabel";
-            this.FileLabel.Size = new System.Drawing.Size(152, 25);
-            this.FileLabel.TabIndex = 4;
-            this.FileLabel.Text = "Input File Name ";
-            // 
-            // FileInput
-            // 
-            this.FileInput.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.FileInput.Location = new System.Drawing.Point(300, 116);
-            this.FileInput.Name = "FileInput";
-            this.FileInput.Size = new System.Drawing.Size(188, 34);
-            this.FileInput.TabIndex = 6;
-            this.FileInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FileInput_KeyDown);
-            // 
-            // OccurenceCheckBox
-            // 
-            this.OccurenceCheckBox.AutoSize = true;
-            this.OccurenceCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.OccurenceCheckBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.OccurenceCheckBox.Location = new System.Drawing.Point(332, 156);
-            this.OccurenceCheckBox.Name = "OccurenceCheckBox";
-            this.OccurenceCheckBox.Size = new System.Drawing.Size(156, 24);
-            this.OccurenceCheckBox.TabIndex = 7;
-            this.OccurenceCheckBox.Text = "Find all occurences";
-            this.OccurenceCheckBox.UseVisualStyleBackColor = false;
-            this.OccurenceCheckBox.CheckedChanged += new System.EventHandler(this.OccurenceCheckBox_CheckedChanged);
-            // 
-            // MethodLabel
-            // 
-            this.MethodLabel.AutoSize = true;
-            this.MethodLabel.BackColor = System.Drawing.Color.Transparent;
-            this.MethodLabel.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.MethodLabel.Location = new System.Drawing.Point(586, 84);
-            this.MethodLabel.Name = "MethodLabel";
-            this.MethodLabel.Size = new System.Drawing.Size(192, 25);
-            this.MethodLabel.TabIndex = 8;
-            this.MethodLabel.Text = "Input Search Method";
-            // 
-            // BFSButton
-            // 
-            this.BFSButton.AutoSize = true;
-            this.BFSButton.BackColor = System.Drawing.Color.Transparent;
-            this.BFSButton.Checked = true;
-            this.BFSButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.BFSButton.Location = new System.Drawing.Point(586, 116);
-            this.BFSButton.Name = "BFSButton";
-            this.BFSButton.Size = new System.Drawing.Size(151, 24);
-            this.BFSButton.TabIndex = 9;
-            this.BFSButton.TabStop = true;
-            this.BFSButton.Text = "BFS (Breadth First)";
-            this.BFSButton.UseVisualStyleBackColor = false;
-            this.BFSButton.CheckedChanged += new System.EventHandler(this.BFSButton_CheckedChanged);
-            // 
-            // DFSButton
-            // 
-            this.DFSButton.AutoSize = true;
-            this.DFSButton.BackColor = System.Drawing.Color.Transparent;
-            this.DFSButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.DFSButton.Location = new System.Drawing.Point(586, 144);
-            this.DFSButton.Name = "DFSButton";
-            this.DFSButton.Size = new System.Drawing.Size(142, 24);
-            this.DFSButton.TabIndex = 10;
-            this.DFSButton.Text = "DFS (Depth First)";
-            this.DFSButton.UseVisualStyleBackColor = false;
-            this.DFSButton.CheckedChanged += new System.EventHandler(this.DFSButton_CheckedChanged);
+            this.materialCard4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCard4.Controls.Add(this.delaySpeed);
+            this.materialCard4.Controls.Add(this.LabelDrawingDelay);
+            this.materialCard4.Controls.Add(this.SearchButton);
+            this.materialCard4.Depth = 0;
+            this.materialCard4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialCard4.Location = new System.Drawing.Point(1007, 42);
+            this.materialCard4.Margin = new System.Windows.Forms.Padding(14);
+            this.materialCard4.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCard4.Name = "materialCard4";
+            this.materialCard4.Padding = new System.Windows.Forms.Padding(14);
+            this.materialCard4.Size = new System.Drawing.Size(309, 148);
+            this.materialCard4.TabIndex = 41;
             // 
             // delaySpeed
             // 
-            this.delaySpeed.BackColor = System.Drawing.SystemColors.Menu;
-            this.delaySpeed.LargeChange = 50;
-            this.delaySpeed.Location = new System.Drawing.Point(1104, 146);
-            this.delaySpeed.Maximum = 500;
-            this.delaySpeed.Minimum = 25;
+            this.delaySpeed.Depth = 0;
+            this.delaySpeed.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.delaySpeed.Location = new System.Drawing.Point(36, 53);
+            this.delaySpeed.MouseState = MaterialSkin.MouseState.HOVER;
             this.delaySpeed.Name = "delaySpeed";
-            this.delaySpeed.Size = new System.Drawing.Size(187, 56);
-            this.delaySpeed.SmallChange = 25;
-            this.delaySpeed.TabIndex = 4;
-            this.delaySpeed.TickFrequency = 25;
+            this.delaySpeed.RangeMax = 500;
+            this.delaySpeed.RangeMin = 25;
+            this.delaySpeed.Size = new System.Drawing.Size(250, 40);
+            this.delaySpeed.TabIndex = 25;
+            this.delaySpeed.Text = "Delay";
             this.delaySpeed.Value = 25;
-            this.delaySpeed.ValueChanged += new System.EventHandler(this.delaySpeed_ValueChanged);
+            this.delaySpeed.ValueSuffix = " ms";
+            this.delaySpeed.onValueChanged += new MaterialSkin.Controls.MaterialSlider.ValueChanged(this.delaySpeed_onValueChanged);
             // 
-            // label1
+            // LabelDrawingDelay
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(1046, 146);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 20);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "Delay";
-            // 
-            // delayLabel
-            // 
-            this.delayLabel.AutoSize = true;
-            this.delayLabel.BackColor = System.Drawing.Color.Transparent;
-            this.delayLabel.Location = new System.Drawing.Point(1297, 146);
-            this.delayLabel.Name = "delayLabel";
-            this.delayLabel.Size = new System.Drawing.Size(43, 17);
-            this.delayLabel.TabIndex = 14;
-            this.delayLabel.Text = "25 ms";
-            // 
-            // DirLabel
-            // 
-            this.DirLabel.AutoSize = true;
-            this.DirLabel.BackColor = System.Drawing.Color.Transparent;
-            this.DirLabel.Location = new System.Drawing.Point(35, 185);
-            this.DirLabel.MaximumSize = new System.Drawing.Size(450, 150);
-            this.DirLabel.Name = "DirLabel";
-            this.DirLabel.Size = new System.Drawing.Size(112, 17);
-            this.DirLabel.TabIndex = 15;
-            this.DirLabel.Text = "Starting directory:";
-            // 
-            // Status
-            // 
-            this.Status.AutoSize = true;
-            this.Status.Location = new System.Drawing.Point(586, 185);
-            this.Status.MaximumSize = new System.Drawing.Size(875, 450);
-            this.Status.Name = "Status";
-            this.Status.Size = new System.Drawing.Size(176, 17);
-            this.Status.TabIndex = 16;
-            this.Status.Text = "Waiting for search to begin...";
-            // 
-            // DirButton
-            // 
-            this.DirButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.DirButton.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.DirButton.Depth = 0;
-            this.DirButton.HighEmphasis = true;
-            this.DirButton.Icon = null;
-            this.DirButton.Location = new System.Drawing.Point(35, 118);
-            this.DirButton.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.DirButton.MouseState = MaterialSkin.MouseState.HOVER;
-            this.DirButton.Name = "DirButton";
-            this.DirButton.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.DirButton.Size = new System.Drawing.Size(137, 36);
-            this.DirButton.TabIndex = 17;
-            this.DirButton.Text = "CHOOSE FOLDER";
-            this.DirButton.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.DirButton.UseAccentColor = false;
-            this.DirButton.UseVisualStyleBackColor = true;
-            this.DirButton.Click += new System.EventHandler(this.DirButton_Click);
+            this.LabelDrawingDelay.AutoSize = true;
+            this.LabelDrawingDelay.Depth = 0;
+            this.LabelDrawingDelay.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.LabelDrawingDelay.Location = new System.Drawing.Point(17, 14);
+            this.LabelDrawingDelay.MouseState = MaterialSkin.MouseState.HOVER;
+            this.LabelDrawingDelay.Name = "LabelDrawingDelay";
+            this.LabelDrawingDelay.Size = new System.Drawing.Size(198, 19);
+            this.LabelDrawingDelay.TabIndex = 42;
+            this.LabelDrawingDelay.Text = "Input Drawing Delay (in ms)";
             // 
             // SearchButton
             // 
@@ -226,98 +239,470 @@
             this.SearchButton.Depth = 0;
             this.SearchButton.HighEmphasis = true;
             this.SearchButton.Icon = null;
-            this.SearchButton.Location = new System.Drawing.Point(1162, 101);
+            this.SearchButton.Location = new System.Drawing.Point(113, 102);
             this.SearchButton.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.SearchButton.MouseState = MaterialSkin.MouseState.HOVER;
             this.SearchButton.Name = "SearchButton";
             this.SearchButton.NoAccentTextColor = System.Drawing.Color.Empty;
             this.SearchButton.Size = new System.Drawing.Size(78, 36);
-            this.SearchButton.TabIndex = 18;
+            this.SearchButton.TabIndex = 35;
             this.SearchButton.Text = "SEARCH";
             this.SearchButton.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.SearchButton.UseAccentColor = false;
             this.SearchButton.UseVisualStyleBackColor = true;
             this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
             // 
-            // DarkMode
+            // materialCard3
             // 
-            this.DarkMode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.DarkMode.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.DarkMode.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.DarkMode.Depth = 0;
-            this.DarkMode.HighEmphasis = true;
-            this.DarkMode.Icon = null;
-            this.DarkMode.Location = new System.Drawing.Point(1295, 73);
-            this.DarkMode.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.DarkMode.MouseState = MaterialSkin.MouseState.HOVER;
-            this.DarkMode.Name = "DarkMode";
-            this.DarkMode.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.DarkMode.Size = new System.Drawing.Size(64, 36);
-            this.DarkMode.TabIndex = 19;
-            this.DarkMode.Text = "🌞";
-            this.DarkMode.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.DarkMode.UseAccentColor = false;
-            this.DarkMode.UseVisualStyleBackColor = true;
-            this.DarkMode.Click += new System.EventHandler(this.DarkMode_Click);
+            this.materialCard3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCard3.Controls.Add(this.DFSButton);
+            this.materialCard3.Controls.Add(this.BFSButton);
+            this.materialCard3.Controls.Add(this.LabelSearchMethod);
+            this.materialCard3.Depth = 0;
+            this.materialCard3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialCard3.Location = new System.Drawing.Point(735, 42);
+            this.materialCard3.Margin = new System.Windows.Forms.Padding(14);
+            this.materialCard3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCard3.Name = "materialCard3";
+            this.materialCard3.Padding = new System.Windows.Forms.Padding(14);
+            this.materialCard3.Size = new System.Drawing.Size(260, 148);
+            this.materialCard3.TabIndex = 40;
             // 
-            // RTF
+            // DFSButton
             // 
-            this.RTF.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.RTF.Location = new System.Drawing.Point(585, 208);
-            this.RTF.Name = "RTF";
-            this.RTF.Size = new System.Drawing.Size(750, 125);
-            this.RTF.TabIndex = 20;
+            this.DFSButton.AutoSize = true;
+            this.DFSButton.Depth = 0;
+            this.DFSButton.Location = new System.Drawing.Point(14, 77);
+            this.DFSButton.Margin = new System.Windows.Forms.Padding(0);
+            this.DFSButton.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.DFSButton.MouseState = MaterialSkin.MouseState.HOVER;
+            this.DFSButton.Name = "DFSButton";
+            this.DFSButton.Ripple = true;
+            this.DFSButton.Size = new System.Drawing.Size(157, 37);
+            this.DFSButton.TabIndex = 42;
+            this.DFSButton.TabStop = true;
+            this.DFSButton.Text = "DFS (Depth First)";
+            this.DFSButton.UseVisualStyleBackColor = true;
+            this.DFSButton.Click += new System.EventHandler(this.DFSButton_CheckedChanged);
+            // 
+            // BFSButton
+            // 
+            this.BFSButton.AutoSize = true;
+            this.BFSButton.BackColor = System.Drawing.Color.Transparent;
+            this.BFSButton.Checked = true;
+            this.BFSButton.Depth = 0;
+            this.BFSButton.Location = new System.Drawing.Point(14, 45);
+            this.BFSButton.Margin = new System.Windows.Forms.Padding(0);
+            this.BFSButton.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.BFSButton.MouseState = MaterialSkin.MouseState.HOVER;
+            this.BFSButton.Name = "BFSButton";
+            this.BFSButton.Ripple = true;
+            this.BFSButton.Size = new System.Drawing.Size(169, 37);
+            this.BFSButton.TabIndex = 42;
+            this.BFSButton.TabStop = true;
+            this.BFSButton.Text = "BFS (Breadth First)";
+            this.BFSButton.UseVisualStyleBackColor = false;
+            this.BFSButton.Click += new System.EventHandler(this.BFSButton_CheckedChanged);
+            // 
+            // LabelSearchMethod
+            // 
+            this.LabelSearchMethod.AutoSize = true;
+            this.LabelSearchMethod.BackColor = System.Drawing.Color.Transparent;
+            this.LabelSearchMethod.Depth = 0;
+            this.LabelSearchMethod.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.LabelSearchMethod.Location = new System.Drawing.Point(17, 14);
+            this.LabelSearchMethod.MouseState = MaterialSkin.MouseState.HOVER;
+            this.LabelSearchMethod.Name = "LabelSearchMethod";
+            this.LabelSearchMethod.Size = new System.Drawing.Size(148, 19);
+            this.LabelSearchMethod.TabIndex = 42;
+            this.LabelSearchMethod.Text = "Input Search Method";
+            // 
+            // materialCard2
+            // 
+            this.materialCard2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCard2.Controls.Add(this.LabelInputFileName);
+            this.materialCard2.Controls.Add(this.OccurenceCheckBox);
+            this.materialCard2.Controls.Add(this.FileInput);
+            this.materialCard2.Depth = 0;
+            this.materialCard2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialCard2.Location = new System.Drawing.Point(399, 42);
+            this.materialCard2.Margin = new System.Windows.Forms.Padding(14);
+            this.materialCard2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCard2.Name = "materialCard2";
+            this.materialCard2.Padding = new System.Windows.Forms.Padding(14);
+            this.materialCard2.Size = new System.Drawing.Size(327, 148);
+            this.materialCard2.TabIndex = 39;
+            // 
+            // LabelInputFileName
+            // 
+            this.LabelInputFileName.AutoSize = true;
+            this.LabelInputFileName.Depth = 0;
+            this.LabelInputFileName.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.LabelInputFileName.Location = new System.Drawing.Point(17, 14);
+            this.LabelInputFileName.MouseState = MaterialSkin.MouseState.HOVER;
+            this.LabelInputFileName.Name = "LabelInputFileName";
+            this.LabelInputFileName.Size = new System.Drawing.Size(112, 19);
+            this.LabelInputFileName.TabIndex = 45;
+            this.LabelInputFileName.Text = "Input File Name";
+            // 
+            // OccurenceCheckBox
+            // 
+            this.OccurenceCheckBox.AutoSize = true;
+            this.OccurenceCheckBox.Depth = 0;
+            this.OccurenceCheckBox.Location = new System.Drawing.Point(18, 103);
+            this.OccurenceCheckBox.Margin = new System.Windows.Forms.Padding(0);
+            this.OccurenceCheckBox.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.OccurenceCheckBox.MouseState = MaterialSkin.MouseState.HOVER;
+            this.OccurenceCheckBox.Name = "OccurenceCheckBox";
+            this.OccurenceCheckBox.ReadOnly = false;
+            this.OccurenceCheckBox.Ripple = true;
+            this.OccurenceCheckBox.Size = new System.Drawing.Size(171, 37);
+            this.OccurenceCheckBox.TabIndex = 44;
+            this.OccurenceCheckBox.Text = "Find all occurences";
+            this.OccurenceCheckBox.UseVisualStyleBackColor = true;
+            this.OccurenceCheckBox.Click += new System.EventHandler(this.OccurenceCheckBox_CheckedChanged);
+            // 
+            // FileInput
+            // 
+            this.FileInput.AnimateReadOnly = false;
+            this.FileInput.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.FileInput.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.FileInput.Depth = 0;
+            this.FileInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.FileInput.HelperText = "Type file name...";
+            this.FileInput.HideSelection = true;
+            this.FileInput.Hint = "Type file name...";
+            this.FileInput.LeadingIcon = null;
+            this.FileInput.Location = new System.Drawing.Point(18, 45);
+            this.FileInput.MaxLength = 32767;
+            this.FileInput.MouseState = MaterialSkin.MouseState.OUT;
+            this.FileInput.Name = "FileInput";
+            this.FileInput.PasswordChar = '\0';
+            this.FileInput.PrefixSuffixText = null;
+            this.FileInput.ReadOnly = false;
+            this.FileInput.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.FileInput.SelectedText = "";
+            this.FileInput.SelectionLength = 0;
+            this.FileInput.SelectionStart = 0;
+            this.FileInput.ShortcutsEnabled = true;
+            this.FileInput.Size = new System.Drawing.Size(261, 48);
+            this.FileInput.TabIndex = 43;
+            this.FileInput.TabStop = false;
+            this.FileInput.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.FileInput.TrailingIcon = null;
+            this.FileInput.UseSystemPasswordChar = false;
+            this.FileInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FileInput_KeyDown);
+            // 
+            // materialCard1
+            // 
+            this.materialCard1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCard1.Controls.Add(this.SelectedDir);
+            this.materialCard1.Controls.Add(this.DirLabel);
+            this.materialCard1.Controls.Add(this.LabelDirectory);
+            this.materialCard1.Controls.Add(this.DirButton);
+            this.materialCard1.Depth = 0;
+            this.materialCard1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialCard1.Location = new System.Drawing.Point(11, 42);
+            this.materialCard1.Margin = new System.Windows.Forms.Padding(14);
+            this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCard1.Name = "materialCard1";
+            this.materialCard1.Padding = new System.Windows.Forms.Padding(14);
+            this.materialCard1.Size = new System.Drawing.Size(377, 148);
+            this.materialCard1.TabIndex = 38;
+            // 
+            // DirLabel
+            // 
+            this.DirLabel.AutoSize = true;
+            this.DirLabel.BackColor = System.Drawing.Color.Transparent;
+            this.DirLabel.Depth = 0;
+            this.DirLabel.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.DirLabel.FontType = MaterialSkin.MaterialSkinManager.fontType.Body2;
+            this.DirLabel.Location = new System.Drawing.Point(17, 97);
+            this.DirLabel.MouseState = MaterialSkin.MouseState.HOVER;
+            this.DirLabel.Name = "DirLabel";
+            this.DirLabel.Size = new System.Drawing.Size(112, 17);
+            this.DirLabel.TabIndex = 36;
+            this.DirLabel.Text = "Starting directory:";
+            // 
+            // LabelDirectory
+            // 
+            this.LabelDirectory.AutoSize = true;
+            this.LabelDirectory.BackColor = System.Drawing.Color.Transparent;
+            this.LabelDirectory.Depth = 0;
+            this.LabelDirectory.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.LabelDirectory.Location = new System.Drawing.Point(17, 14);
+            this.LabelDirectory.MouseState = MaterialSkin.MouseState.HOVER;
+            this.LabelDirectory.Name = "LabelDirectory";
+            this.LabelDirectory.Size = new System.Drawing.Size(181, 19);
+            this.LabelDirectory.TabIndex = 35;
+            this.LabelDirectory.Text = "Choose Starting Directory";
+            // 
+            // DirButton
+            // 
+            this.DirButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.DirButton.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.DirButton.Depth = 0;
+            this.DirButton.HighEmphasis = true;
+            this.DirButton.Icon = null;
+            this.DirButton.Location = new System.Drawing.Point(17, 46);
+            this.DirButton.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.DirButton.MouseState = MaterialSkin.MouseState.HOVER;
+            this.DirButton.Name = "DirButton";
+            this.DirButton.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.DirButton.Size = new System.Drawing.Size(137, 36);
+            this.DirButton.TabIndex = 34;
+            this.DirButton.Text = "CHOOSE FOLDER";
+            this.DirButton.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.DirButton.UseAccentColor = false;
+            this.DirButton.UseVisualStyleBackColor = true;
+            this.DirButton.Click += new System.EventHandler(this.DirButton_Click);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.materialLabel6);
+            this.tabPage2.Controls.Add(this.materialCard6);
+            this.tabPage2.ImageKey = "information.png";
+            this.tabPage2.Location = new System.Drawing.Point(4, 39);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1386, 670);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Info";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // materialLabel6
+            // 
+            this.materialLabel6.AutoSize = true;
+            this.materialLabel6.Depth = 0;
+            this.materialLabel6.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel6.Location = new System.Drawing.Point(21, 24);
+            this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel6.Name = "materialLabel6";
+            this.materialLabel6.Size = new System.Drawing.Size(48, 19);
+            this.materialLabel6.TabIndex = 6;
+            this.materialLabel6.Text = "Author";
+            // 
+            // materialCard6
+            // 
+            this.materialCard6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCard6.Controls.Add(this.materialLabel4);
+            this.materialCard6.Controls.Add(this.materialLabel1);
+            this.materialCard6.Controls.Add(this.materialLabel3);
+            this.materialCard6.Controls.Add(this.materialLabel2);
+            this.materialCard6.Depth = 0;
+            this.materialCard6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialCard6.Location = new System.Drawing.Point(21, 57);
+            this.materialCard6.Margin = new System.Windows.Forms.Padding(14);
+            this.materialCard6.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCard6.Name = "materialCard6";
+            this.materialCard6.Padding = new System.Windows.Forms.Padding(14);
+            this.materialCard6.Size = new System.Drawing.Size(402, 201);
+            this.materialCard6.TabIndex = 0;
+            // 
+            // materialLabel4
+            // 
+            this.materialLabel4.AutoSize = true;
+            this.materialLabel4.Depth = 0;
+            this.materialLabel4.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel4.Location = new System.Drawing.Point(27, 141);
+            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel4.Name = "materialLabel4";
+            this.materialLabel4.Size = new System.Drawing.Size(156, 19);
+            this.materialLabel4.TabIndex = 5;
+            this.materialLabel4.Text = "Fachry Dennis Heraldi";
+            // 
+            // materialLabel1
+            // 
+            this.materialLabel1.AutoSize = true;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel1.Location = new System.Drawing.Point(27, 32);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(186, 19);
+            this.materialLabel1.TabIndex = 0;
+            this.materialLabel1.Text = "Project made with love by:";
+            // 
+            // materialLabel3
+            // 
+            this.materialLabel3.AutoSize = true;
+            this.materialLabel3.Depth = 0;
+            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel3.Location = new System.Drawing.Point(27, 111);
+            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel3.Name = "materialLabel3";
+            this.materialLabel3.Size = new System.Drawing.Size(160, 19);
+            this.materialLabel3.TabIndex = 4;
+            this.materialLabel3.Text = "Owen Christian Wijaya";
+            // 
+            // materialLabel2
+            // 
+            this.materialLabel2.AutoSize = true;
+            this.materialLabel2.Depth = 0;
+            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel2.Location = new System.Drawing.Point(27, 81);
+            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel2.Name = "materialLabel2";
+            this.materialLabel2.Size = new System.Drawing.Size(78, 19);
+            this.materialLabel2.TabIndex = 3;
+            this.materialLabel2.Text = "Amar Fadil";
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.materialCard7);
+            this.tabPage3.Controls.Add(this.materialLabel5);
+            this.tabPage3.ImageKey = "settings.png";
+            this.tabPage3.Location = new System.Drawing.Point(4, 39);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(1386, 670);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Settings";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // materialCard7
+            // 
+            this.materialCard7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCard7.Controls.Add(this.materialSwitch1);
+            this.materialCard7.Depth = 0;
+            this.materialCard7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialCard7.Location = new System.Drawing.Point(19, 56);
+            this.materialCard7.Margin = new System.Windows.Forms.Padding(14);
+            this.materialCard7.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCard7.Name = "materialCard7";
+            this.materialCard7.Padding = new System.Windows.Forms.Padding(14);
+            this.materialCard7.Size = new System.Drawing.Size(339, 68);
+            this.materialCard7.TabIndex = 38;
+            // 
+            // materialSwitch1
+            // 
+            this.materialSwitch1.AutoSize = true;
+            this.materialSwitch1.Depth = 0;
+            this.materialSwitch1.Location = new System.Drawing.Point(14, 17);
+            this.materialSwitch1.Margin = new System.Windows.Forms.Padding(0);
+            this.materialSwitch1.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.materialSwitch1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialSwitch1.Name = "materialSwitch1";
+            this.materialSwitch1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.materialSwitch1.Ripple = true;
+            this.materialSwitch1.Size = new System.Drawing.Size(158, 37);
+            this.materialSwitch1.TabIndex = 39;
+            this.materialSwitch1.Text = "Light Mode 🌞";
+            this.materialSwitch1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.materialSwitch1.UseVisualStyleBackColor = true;
+            this.materialSwitch1.CheckedChanged += new System.EventHandler(this.materialSwitch1_CheckedChanged);
+            // 
+            // materialLabel5
+            // 
+            this.materialLabel5.AutoSize = true;
+            this.materialLabel5.Depth = 0;
+            this.materialLabel5.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel5.Location = new System.Drawing.Point(19, 23);
+            this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel5.Name = "materialLabel5";
+            this.materialLabel5.Size = new System.Drawing.Size(50, 19);
+            this.materialLabel5.TabIndex = 38;
+            this.materialLabel5.Text = "Theme";
+            // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "home.png");
+            this.imageList1.Images.SetKeyName(1, "information.png");
+            this.imageList1.Images.SetKeyName(2, "settings.png");
+            // 
+            // SelectedDir
+            // 
+            this.SelectedDir.AutoSize = true;
+            this.SelectedDir.Depth = 0;
+            this.SelectedDir.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.SelectedDir.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
+            this.SelectedDir.Location = new System.Drawing.Point(17, 120);
+            this.SelectedDir.MouseState = MaterialSkin.MouseState.HOVER;
+            this.SelectedDir.Name = "SelectedDir";
+            this.SelectedDir.Size = new System.Drawing.Size(146, 14);
+            this.SelectedDir.TabIndex = 37;
+            this.SelectedDir.Text = "Waiting for chosen folder...";
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AccessibleRole = System.Windows.Forms.AccessibleRole.MenuBar;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(1366, 768);
-            this.Controls.Add(this.RTF);
-            this.Controls.Add(this.DarkMode);
-            this.Controls.Add(this.SearchButton);
-            this.Controls.Add(this.DirButton);
-            this.Controls.Add(this.OutputPanel);
-            this.Controls.Add(this.Status);
-            this.Controls.Add(this.DirLabel);
-            this.Controls.Add(this.delayLabel);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.delaySpeed);
-            this.Controls.Add(this.DFSButton);
-            this.Controls.Add(this.BFSButton);
-            this.Controls.Add(this.MethodLabel);
-            this.Controls.Add(this.OccurenceCheckBox);
-            this.Controls.Add(this.FileLabel);
-            this.Controls.Add(this.DirectoryLabel);
-            this.Controls.Add(this.FileInput);
+            this.ClientSize = new System.Drawing.Size(1400, 780);
+            this.Controls.Add(this.materialTabControl1);
+            this.DrawerShowIconsWhenHidden = true;
+            this.DrawerTabControl = this.materialTabControl1;
             this.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.MinimumSize = new System.Drawing.Size(1366, 768);
             this.Name = "MainForm";
             this.Text = "Folder Crawler";
-            ((System.ComponentModel.ISupportInitialize)(this.delaySpeed)).EndInit();
+            this.materialTabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.materialCard5.ResumeLayout(false);
+            this.materialCard5.PerformLayout();
+            this.materialCard4.ResumeLayout(false);
+            this.materialCard4.PerformLayout();
+            this.materialCard3.ResumeLayout(false);
+            this.materialCard3.PerformLayout();
+            this.materialCard2.ResumeLayout(false);
+            this.materialCard2.PerformLayout();
+            this.materialCard1.ResumeLayout(false);
+            this.materialCard1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            this.materialCard6.ResumeLayout(false);
+            this.materialCard6.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            this.materialCard7.ResumeLayout(false);
+            this.materialCard7.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-        private Panel OutputPanel;
-        private Label DirectoryLabel;
-        private Label FileLabel;
-        private TextBox FileInput;
-        private CheckBox OccurenceCheckBox;
-        private Label MethodLabel;
-        private RadioButton BFSButton;
-        private RadioButton DFSButton;
-        private TrackBar delaySpeed;
-        private Label label1;
-        private Label delayLabel;
-        private Label DirLabel;
-        private Label Status;
-        private MaterialSkin.Controls.MaterialButton DirButton;
-        private MaterialSkin.Controls.MaterialButton SearchButton;
-        private MaterialSkin.Controls.MaterialButton DarkMode;
+
+        private MaterialSkin.Controls.MaterialTabControl materialTabControl1;
+        private TabPage tabPage1;
         private FlowLayoutPanel RTF;
+        private MaterialSkin.Controls.MaterialButton SearchButton;
+        private MaterialSkin.Controls.MaterialButton DirButton;
+        private Panel OutputPanel;
+        private TabPage tabPage2;
+        private TabPage tabPage3;
+        private ImageList imageList1;
+        private MaterialSkin.Controls.MaterialCard materialCard4;
+        private MaterialSkin.Controls.MaterialLabel LabelDrawingDelay;
+        private MaterialSkin.Controls.MaterialCard materialCard3;
+        private MaterialSkin.Controls.MaterialCard materialCard2;
+        private MaterialSkin.Controls.MaterialCard materialCard1;
+        private MaterialSkin.Controls.MaterialLabel LabelDirectory;
+        private MaterialSkin.Controls.MaterialLabel DirLabel;
+        private MaterialSkin.Controls.MaterialRadioButton DFSButton;
+        private MaterialSkin.Controls.MaterialRadioButton BFSButton;
+        private MaterialSkin.Controls.MaterialLabel LabelSearchMethod;
+        private MaterialSkin.Controls.MaterialSlider delaySpeed;
+        private MaterialSkin.Controls.MaterialCheckbox OccurenceCheckBox;
+        private MaterialSkin.Controls.MaterialTextBox2 FileInput;
+        private MaterialSkin.Controls.MaterialLabel LabelInputFileName;
+        private MaterialSkin.Controls.MaterialCard materialCard5;
+        private MaterialSkin.Controls.MaterialLabel Status;
+        private MaterialSkin.Controls.MaterialLabel LabelResult;
+        private MaterialSkin.Controls.MaterialCard materialCard6;
+        private MaterialSkin.Controls.MaterialLabel materialLabel1;
+        private MaterialSkin.Controls.MaterialLabel materialLabel4;
+        private MaterialSkin.Controls.MaterialLabel materialLabel3;
+        private MaterialSkin.Controls.MaterialLabel materialLabel2;
+        private MaterialSkin.Controls.MaterialCard materialCard7;
+        private MaterialSkin.Controls.MaterialSwitch materialSwitch1;
+        private MaterialSkin.Controls.MaterialLabel materialLabel5;
+        private MaterialSkin.Controls.MaterialLabel materialLabel7;
+        private MaterialSkin.Controls.MaterialLabel materialLabel6;
+        private MaterialSkin.Controls.MaterialLabel SelectedDir;
     }
 }

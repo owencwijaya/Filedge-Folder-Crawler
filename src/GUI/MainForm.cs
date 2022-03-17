@@ -55,7 +55,7 @@ namespace DirectoryTraversal.GUI
 
                 if (res == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
                 {
-                    DirLabel.Text = "Starting directory:\n" + fbd.SelectedPath;
+                    SelectedDir.Text = fbd.SelectedPath;
                     Drawer.path = fbd.SelectedPath;
                 }
                 else
@@ -153,14 +153,6 @@ namespace DirectoryTraversal.GUI
             }
         }
 
-        private void delaySpeed_ValueChanged(object sender, EventArgs e)
-        {
-            Drawer.Traverser.DrawDelay = delaySpeed.Value;
-            delayLabel.Text = delaySpeed.Value.ToString() + " ms";
-            Drawer.drawDelay = delaySpeed.Value;
-        }
-
-
         // Method Updater
         void UpdateGraph(Graph graph)
         {
@@ -188,18 +180,24 @@ namespace DirectoryTraversal.GUI
    
         }
 
-        private void DarkMode_Click(object sender, EventArgs e)
+      
+        private void delaySpeed_onValueChanged(object sender, int newValue)
+        {
+            Drawer.Traverser.DrawDelay = delaySpeed.Value;
+            Drawer.drawDelay = delaySpeed.Value;
+        }
+
+        
+        private void materialSwitch1_CheckedChanged(object sender, EventArgs e)
         {
             if (SkinManager.Theme == MaterialSkin.MaterialSkinManager.Themes.DARK)
             {
                 SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
-                DarkMode.Text = "🌙";
-            } else if (SkinManager.Theme == MaterialSkin.MaterialSkinManager.Themes.LIGHT)
+            }
+            else if (SkinManager.Theme == MaterialSkin.MaterialSkinManager.Themes.LIGHT)
             {
                 SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
-                DarkMode.Text = "🌞";
             }
         }
-
     }
 }
