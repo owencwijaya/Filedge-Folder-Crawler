@@ -44,6 +44,7 @@
             this.DirButton = new MaterialSkin.Controls.MaterialButton();
             this.SearchButton = new MaterialSkin.Controls.MaterialButton();
             this.DarkMode = new MaterialSkin.Controls.MaterialButton();
+            this.RTF = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.delaySpeed)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,7 +56,7 @@
             this.OutputPanel.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.OutputPanel.Location = new System.Drawing.Point(35, 339);
             this.OutputPanel.Name = "OutputPanel";
-            this.OutputPanel.Size = new System.Drawing.Size(1307, 400);
+            this.OutputPanel.Size = new System.Drawing.Size(1300, 400);
             this.OutputPanel.TabIndex = 1;
             // 
             // DirectoryLabel
@@ -249,7 +250,7 @@
             this.DarkMode.Depth = 0;
             this.DarkMode.HighEmphasis = true;
             this.DarkMode.Icon = null;
-            this.DarkMode.Location = new System.Drawing.Point(1302, 73);
+            this.DarkMode.Location = new System.Drawing.Point(1295, 73);
             this.DarkMode.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.DarkMode.MouseState = MaterialSkin.MouseState.HOVER;
             this.DarkMode.Name = "DarkMode";
@@ -262,12 +263,22 @@
             this.DarkMode.UseVisualStyleBackColor = true;
             this.DarkMode.Click += new System.EventHandler(this.DarkMode_Click);
             // 
+            // RTF
+            // 
+            this.RTF.Location = new System.Drawing.Point(586, 213);
+            this.RTF.Name = "RTF";
+            this.RTF.Size = new System.Drawing.Size(490, 107);
+            this.RTF.TabIndex = 20;
+            this.RTF.Text = "";
+            this.RTF.DetectUrls = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(1373, 768);
+            this.ClientSize = new System.Drawing.Size(1366, 768);
+            this.Controls.Add(this.RTF);
             this.Controls.Add(this.DarkMode);
             this.Controls.Add(this.SearchButton);
             this.Controls.Add(this.DirButton);
@@ -311,5 +322,6 @@
         private MaterialSkin.Controls.MaterialButton DirButton;
         private MaterialSkin.Controls.MaterialButton SearchButton;
         private MaterialSkin.Controls.MaterialButton DarkMode;
+        private RichTextBox RTF;
     }
 }

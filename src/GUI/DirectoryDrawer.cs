@@ -137,7 +137,8 @@ namespace DirectoryTraversal.GUI
                 }
                 foreach (string path in foundPaths)
                 {
-                    UpdateStatus2?.Invoke("- " + path + "\n");
+                    UpdateStatus2?.Invoke(path);
+
                 }
             }
             else

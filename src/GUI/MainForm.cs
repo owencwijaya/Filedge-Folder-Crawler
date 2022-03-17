@@ -12,7 +12,7 @@ namespace DirectoryTraversal.GUI
     using DirectoryTraversal.Lib;
     public partial class MainForm : MaterialForm
     {
-        
+
         // Inisialisasi graphViewer, Drawer
         GViewer graphViewer = new();
         DirectoryDrawer Drawer = new();
@@ -136,18 +136,18 @@ namespace DirectoryTraversal.GUI
                 MessageBox.Show(
                   alert
                 );
-                
+
                 Status.Text = "Searching for file '" + Drawer.fileName + "'...";
 
                 // Start Drawing Travesal Graph
                 Drawer.worker.RunWorkerAsync();
-            } 
+            }
             else
             {
                 MessageBox.Show(
                     "You cannot run a new search now because your previous search is running!",
                     "[ALERT] Another process running!");
-            }           
+            }
         }
 
         private void delaySpeed_ValueChanged(object sender, EventArgs e)
@@ -171,14 +171,14 @@ namespace DirectoryTraversal.GUI
 
         void UpdateStatus1(String text)
         {
-            Status.Text =  text;
+            Status.Text = text;
         }
 
         void UpdateStatus2(String text)
         {
-            Status.Text += text;
+            RTF.Text += "<a href='file:////" + text + "'>" + text + "</a>";
+            RTF.Text += "\n";
         }
-
         private void Status_Click(object sender, EventArgs e)
         {
 
