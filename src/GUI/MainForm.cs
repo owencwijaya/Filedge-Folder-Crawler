@@ -1,33 +1,50 @@
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing.Text;
 using Microsoft.Msagl.Drawing;
 using Microsoft.Msagl.GraphViewerGdi;
 using Color = Microsoft.Msagl.Drawing.Color;
 using DirectoryTraversal.Lib.Algorithms;
-
-using System.Diagnostics;
+using MaterialSkin.Controls;
 
 namespace DirectoryTraversal.GUI
 {
     using DirectoryTraversal.Lib;
-    public partial class MainForm : Form
+    public partial class MainForm : MaterialForm
     {
         
         // Inisialisasi graphViewer, Drawer
         GViewer graphViewer = new();
         DirectoryDrawer Drawer = new();
-    
+        readonly MaterialSkin.MaterialSkinManager SkinManager;
         public MainForm()
         {
             InitializeComponent();
             OutputPanel.SuspendLayout();
             OutputPanel.Controls.Add(graphViewer);
             OutputPanel.ResumeLayout();
-            graphViewer.Size = new Size(1240, 600);
+            graphViewer.Size = new Size(1300, 400);
+            graphViewer.BackColor = SystemColors.ButtonShadow;
             graphViewer.AutoSize = true;
             graphViewer.Anchor = (AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
             Drawer.UpdateGraph = UpdateGraph;
             Drawer.UpdateStatus1 = UpdateStatus1;
             Drawer.UpdateStatus2 = UpdateStatus2;
+
+            SkinManager = MaterialSkin.MaterialSkinManager.Instance;
+            SkinManager.EnforceBackcolorOnAllComponents = true;
+            SkinManager.AddFormToManage(this);
+            SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
+            SkinManager.ColorScheme = new MaterialSkin.ColorScheme(
+                MaterialSkin.Primary.BlueGrey800,
+                MaterialSkin.Primary.BlueGrey900,
+                MaterialSkin.Primary.BlueGrey500,
+                MaterialSkin.Accent.LightBlue200,
+                MaterialSkin.TextShade.WHITE);
+
+            //PrivateFontCollection pfc = new PrivateFontCollection();
+            //pfc.AddFontFile("LexendDeca-Regular.ttf");
+            //DirLabel.Font = new Font(pfc.Families[0], 16);
         }
 
         private void DirButton_Click(object sender, EventArgs e)
@@ -160,6 +177,11 @@ namespace DirectoryTraversal.GUI
         void UpdateStatus2(String text)
         {
             Status.Text += text;
+        }
+
+        private void Status_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
