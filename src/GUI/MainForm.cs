@@ -1,4 +1,4 @@
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing.Text;
 using Microsoft.Msagl.Drawing;
@@ -16,7 +16,7 @@ namespace DirectoryTraversal.GUI
         // Inisialisasi graphViewer, Drawer
         GViewer graphViewer = new();
         DirectoryDrawer Drawer = new();
-        readonly MaterialSkin.MaterialSkinManager SkinManager;
+        public MaterialSkin.MaterialSkinManager SkinManager;
         public MainForm()
         {
             InitializeComponent();
@@ -34,7 +34,7 @@ namespace DirectoryTraversal.GUI
             SkinManager = MaterialSkin.MaterialSkinManager.Instance;
             SkinManager.EnforceBackcolorOnAllComponents = true;
             SkinManager.AddFormToManage(this);
-            SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
+            SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
             SkinManager.ColorScheme = new MaterialSkin.ColorScheme(
                 MaterialSkin.Primary.BlueGrey800,
                 MaterialSkin.Primary.BlueGrey900,
@@ -182,6 +182,24 @@ namespace DirectoryTraversal.GUI
         private void Status_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void DirectoryLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DarkMode_Click(object sender, EventArgs e)
+        {
+            if (SkinManager.Theme == MaterialSkin.MaterialSkinManager.Themes.DARK)
+            {
+                SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
+                DarkMode.Text = "🌙";
+            } else if (SkinManager.Theme == MaterialSkin.MaterialSkinManager.Themes.LIGHT)
+            {
+                SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
+                DarkMode.Text = "🌞";
+            }
         }
     }
 }
