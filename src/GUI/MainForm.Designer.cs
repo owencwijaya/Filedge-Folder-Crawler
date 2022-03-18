@@ -281,7 +281,7 @@
             this.LabelSearchMethod.AutoSize = true;
             this.LabelSearchMethod.BackColor = System.Drawing.Color.Transparent;
             this.LabelSearchMethod.Depth = 0;
-            this.LabelSearchMethod.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.LabelSearchMethod.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.LabelSearchMethod.Location = new System.Drawing.Point(17, 14);
             this.LabelSearchMethod.MouseState = MaterialSkin.MouseState.HOVER;
             this.LabelSearchMethod.Name = "LabelSearchMethod";
@@ -309,7 +309,7 @@
             // 
             this.LabelInputFileName.AutoSize = true;
             this.LabelInputFileName.Depth = 0;
-            this.LabelInputFileName.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.LabelInputFileName.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.LabelInputFileName.Location = new System.Drawing.Point(17, 14);
             this.LabelInputFileName.MouseState = MaterialSkin.MouseState.HOVER;
             this.LabelInputFileName.Name = "LabelInputFileName";
@@ -383,14 +383,20 @@
             // 
             // SelectedDir
             // 
+            this.SelectedDir.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.SelectedDir.AutoSize = true;
             this.SelectedDir.Depth = 0;
             this.SelectedDir.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.SelectedDir.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
             this.SelectedDir.Location = new System.Drawing.Point(17, 90);
-            this.SelectedDir.MaximumSize = new Size(materialCard1.Width, 0);
+            this.SelectedDir.MaximumSize = new System.Drawing.Size(300, 0);
+            this.SelectedDir.MinimumSize = new System.Drawing.Size(300, 100);
+            this.SelectedDir.BorderStyle = BorderStyle.None;
             this.SelectedDir.MouseState = MaterialSkin.MouseState.HOVER;
             this.SelectedDir.Name = "SelectedDir";
+            this.SelectedDir.Size = new System.Drawing.Size(129, 14);
             this.SelectedDir.TabIndex = 37;
             this.SelectedDir.Text = "Waiting for root folder...";
             // 
@@ -399,7 +405,7 @@
             this.LabelDirectory.AutoSize = true;
             this.LabelDirectory.BackColor = System.Drawing.Color.Transparent;
             this.LabelDirectory.Depth = 0;
-            this.LabelDirectory.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.LabelDirectory.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.LabelDirectory.Location = new System.Drawing.Point(17, 14);
             this.LabelDirectory.MouseState = MaterialSkin.MouseState.HOVER;
             this.LabelDirectory.Name = "LabelDirectory";
