@@ -23,7 +23,7 @@ namespace DirectoryTraversal.GUI
             OutputPanel.SuspendLayout();
             OutputPanel.Controls.Add(graphViewer);
             OutputPanel.ResumeLayout();
-            graphViewer.Size = new Size(1300, 400);
+            graphViewer.Size = new Size(OutputPanel.Width, OutputPanel.Height);
             graphViewer.BackColor = SystemColors.ButtonShadow;
             graphViewer.AutoSize = true;
             graphViewer.Anchor = (AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
@@ -42,6 +42,13 @@ namespace DirectoryTraversal.GUI
                 MaterialSkin.Accent.LightBlue200,
                 MaterialSkin.TextShade.WHITE);
 
+            delaySpeed.onValueChanged += new MaterialSkin.Controls.MaterialSlider.ValueChanged(
+                (sender, e) =>
+                {
+                    Drawer.Traverser.DrawDelay = delaySpeed.Value;
+                    Drawer.drawDelay = delaySpeed.Value;
+                });
+
             //PrivateFontCollection pfc = new PrivateFontCollection();
             //pfc.AddFontFile("LexendDeca-Regular.ttf");
             //DirLabel.Font = new Font(pfc.Families[0], 16);
@@ -55,8 +62,8 @@ namespace DirectoryTraversal.GUI
 
                 if (res == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
                 {
-                    SelectedDir.Text = fbd.SelectedPath;
                     Drawer.path = fbd.SelectedPath;
+                    SelectedDir.Text = fbd.SelectedPath;
                 }
                 else
                 {
@@ -153,6 +160,14 @@ namespace DirectoryTraversal.GUI
             }
         }
 
+        private void delaySpeed_ValueChanged(object sender)
+        {
+            Drawer.Traverser.DrawDelay = delaySpeed.Value;
+            //delayLabel.Text = delaySpeed.Value.ToString() + " ms";
+            Drawer.drawDelay = delaySpeed.Value;
+        }
+
+
         // Method Updater
         void UpdateGraph(Graph graph)
         {
@@ -172,22 +187,14 @@ namespace DirectoryTraversal.GUI
             data.LinkData = text;
             link.Links.Add(data);
             link.MaximumSize = new Size(RTF.Width, 200);
+            link.LinkColor = ColorTranslator.FromHtml("#2185a6");
             link.AutoSize = true;
             link.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(
                 (sender, e) => Process.Start(Environment.GetEnvironmentVariable("WINDIR") + @"\explorer.exe",
                 @text.Remove(text.LastIndexOf('\\'))));
             RTF.Controls.Add(link);
-   
         }
 
-      
-        private void delaySpeed_onValueChanged(object sender, int newValue)
-        {
-            Drawer.Traverser.DrawDelay = delaySpeed.Value;
-            Drawer.drawDelay = delaySpeed.Value;
-        }
-
-        
         private void materialSwitch1_CheckedChanged(object sender, EventArgs e)
         {
             if (SkinManager.Theme == MaterialSkin.MaterialSkinManager.Themes.DARK)
@@ -199,5 +206,6 @@ namespace DirectoryTraversal.GUI
                 SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
             }
         }
+
     }
 }
