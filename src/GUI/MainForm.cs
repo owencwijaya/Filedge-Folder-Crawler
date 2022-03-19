@@ -16,6 +16,8 @@ namespace DirectoryTraversal.GUI
             InitializeComponent();
             OutputPanel.SuspendLayout();
             Drawer.GraphViewer.Size = new Size(OutputPanel.Width, OutputPanel.Height);
+            Drawer.GraphViewer.BackColor = SystemColors.ButtonShadow;
+            Drawer.GraphViewer.ForeColor = SystemColors.ButtonShadow;
             OutputPanel.Controls.Add(Drawer.GraphViewer);
             OutputPanel.ResumeLayout();
 
@@ -25,7 +27,7 @@ namespace DirectoryTraversal.GUI
             SkinManager = MaterialSkinManager.Instance;
             SkinManager.EnforceBackcolorOnAllComponents = true;
             SkinManager.AddFormToManage(this);
-            SkinManager.Theme = MaterialSkinManager.Themes.DARK;
+            SkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             SkinManager.ColorScheme = new ColorScheme(
                 Primary.BlueGrey800,
                 Primary.BlueGrey900,

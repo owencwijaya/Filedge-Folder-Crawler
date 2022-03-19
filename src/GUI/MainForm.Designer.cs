@@ -33,8 +33,8 @@
             this.materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.materialCard5 = new MaterialSkin.Controls.MaterialCard();
-            this.Status = new MaterialSkin.Controls.MaterialLabel();
             this.RTF = new System.Windows.Forms.FlowLayoutPanel();
+            this.Status = new MaterialSkin.Controls.MaterialLabel();
             this.OutputPanel = new System.Windows.Forms.Panel();
             this.materialCard4 = new MaterialSkin.Controls.MaterialCard();
             this.delaySpeed = new MaterialSkin.Controls.MaterialSlider();
@@ -90,7 +90,7 @@
             this.materialTabControl1.Multiline = true;
             this.materialTabControl1.Name = "materialTabControl1";
             this.materialTabControl1.SelectedIndex = 0;
-            this.materialTabControl1.Size = new System.Drawing.Size(1360, 713);
+            this.materialTabControl1.Size = new System.Drawing.Size(1361, 723);
             this.materialTabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -104,7 +104,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 39);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1352, 670);
+            this.tabPage1.Size = new System.Drawing.Size(1353, 680);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Home";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -115,8 +115,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.materialCard5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.materialCard5.Controls.Add(this.Status);
             this.materialCard5.Controls.Add(this.RTF);
+            this.materialCard5.Controls.Add(this.Status);
             this.materialCard5.Controls.Add(this.OutputPanel);
             this.materialCard5.Depth = 0;
             this.materialCard5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
@@ -125,30 +125,31 @@
             this.materialCard5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard5.Name = "materialCard5";
             this.materialCard5.Padding = new System.Windows.Forms.Padding(14);
-            this.materialCard5.Size = new System.Drawing.Size(1324, 481);
+            this.materialCard5.Size = new System.Drawing.Size(1312, 488);
             this.materialCard5.TabIndex = 43;
+            // 
+            // RTF
+            // 
+            this.RTF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.RTF.AutoScroll = true;
+            this.RTF.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.RTF.Location = new System.Drawing.Point(17, 400);
+            this.RTF.Name = "RTF";
+            this.RTF.Size = new System.Drawing.Size(622, 71);
+            this.RTF.TabIndex = 37;
+            this.RTF.WrapContents = false;
             // 
             // Status
             // 
             this.Status.AutoSize = true;
             this.Status.Depth = 0;
             this.Status.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.Status.Location = new System.Drawing.Point(17, 14);
+            this.Status.Location = new System.Drawing.Point(17, 13);
             this.Status.MouseState = MaterialSkin.MouseState.HOVER;
             this.Status.Name = "Status";
             this.Status.Size = new System.Drawing.Size(203, 19);
             this.Status.TabIndex = 42;
             this.Status.Text = "Waiting for search to begin...";
-            // 
-            // RTF
-            // 
-            this.RTF.AutoScroll = true;
-            this.RTF.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.RTF.Location = new System.Drawing.Point(685, 14);
-            this.RTF.Name = "RTF";
-            this.RTF.Size = new System.Drawing.Size(622, 71);
-            this.RTF.TabIndex = 37;
-            this.RTF.WrapContents = false;
             // 
             // OutputPanel
             // 
@@ -156,9 +157,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.OutputPanel.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.OutputPanel.Location = new System.Drawing.Point(17, 91);
+            this.OutputPanel.ForeColor = System.Drawing.SystemColors.ButtonShadow;
+            this.OutputPanel.Location = new System.Drawing.Point(17, 35);
             this.OutputPanel.Name = "OutputPanel";
-            this.OutputPanel.Size = new System.Drawing.Size(1290, 373);
+            this.OutputPanel.Size = new System.Drawing.Size(1265, 342);
             this.OutputPanel.TabIndex = 22;
             // 
             // materialCard4
@@ -441,7 +443,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 39);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1352, 670);
+            this.tabPage2.Size = new System.Drawing.Size(1353, 680);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Info";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -531,7 +533,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 39);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1352, 670);
+            this.tabPage3.Size = new System.Drawing.Size(1353, 680);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Settings";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -592,10 +594,10 @@
             // MainForm
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.MenuBar;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(1366, 780);
+            this.ClientSize = new System.Drawing.Size(1367, 790);
             this.Controls.Add(this.materialTabControl1);
             this.DrawerShowIconsWhenHidden = true;
             this.DrawerTabControl = this.materialTabControl1;
