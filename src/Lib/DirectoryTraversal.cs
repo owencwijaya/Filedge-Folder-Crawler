@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks; 
-
-namespace DirectoryTraversal.Lib
+﻿namespace DirectoryTraversal.Lib
 {
     using Algorithms;
 
@@ -15,14 +9,9 @@ namespace DirectoryTraversal.Lib
     }
     public class DirectoryTraversal
     {
-        private static BFS TraverseBFS;
-        private static DFS TraverseDFS;
+        readonly BFS TraverseBFS = new();
+        readonly DFS TraverseDFS = new();
 
-        public DirectoryTraversal()
-        {
-            TraverseBFS = new BFS();
-            TraverseDFS = new DFS();
-        }
         public Action<FileInfo>? OnFile
         {
             set 
@@ -50,8 +39,6 @@ namespace DirectoryTraversal.Lib
                 TraverseBFS.OnFound = value;
             }
         }
-
-   
         public int DrawDelay 
         {
             set
@@ -60,7 +47,6 @@ namespace DirectoryTraversal.Lib
                 TraverseDFS.DrawDelay = value;
             }
         }
-        
         public void Traverse(string DirPath, string FileName, bool AllOccurances, Algorithm Algo)
         {
             if (Algo == Algorithm.BFS)

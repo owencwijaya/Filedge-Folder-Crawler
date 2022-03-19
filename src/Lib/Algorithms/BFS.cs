@@ -2,12 +2,11 @@
 {
     internal class BFS : TraversalAlgorithm, ITraversable
     {
-        Queue<string> Q = new();
-        Dictionary<string, bool> VisitedNodes = new();
+        readonly Queue<string> Q = new();
+        readonly Dictionary<string, bool> VisitedNodes = new();
         public BFS(int DrawDelay = 25)
         {
             this.DrawDelay = DrawDelay;
-            this.isFound = false;
         }
         void TraverseBFS(string DirPath)
         {
@@ -27,7 +26,6 @@
                         OnFile?.Invoke(File);
                         if (File.Name == FileName)
                         {
-                            FileResult.Append(File);
                             OnFound?.Invoke(File);
                             if (!AllOccurences)
                             {
@@ -37,7 +35,6 @@
 
                             }
                         }
-
                     }
                     Thread.Sleep(DrawDelay);
                 }
@@ -56,7 +53,6 @@
         {
             this.FileName = FileName;
             AllOccurences = AllOccurance;
-            FileResult.Clear();
             TraverseBFS(DirPath);
         }
     }

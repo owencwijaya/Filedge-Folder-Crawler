@@ -1,6 +1,5 @@
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Windows.Forms;
 using Microsoft.Msagl.Drawing;
 using Microsoft.Msagl.GraphViewerGdi;
 using Color = Microsoft.Msagl.Drawing.Color;
@@ -12,29 +11,30 @@ namespace DirectoryTraversal.GUI
     public class DirectoryDrawer
     {
         // inisialisasi variabel
-        public string path = "";
-        public bool isBFS = true;
-        public bool isDFS = false;
-        public bool allOccurences = false;
-        public bool running = false;
-        public string fileName = "";
-        public int drawDelay = 25;
+        public string Path = "";
+        public bool IsRunning = false;
+        public string FileName = "";
+        public bool AllOccurences = false;
+        public Algorithm Algorithm { get; set; }
+        public static int DrawDelay {
+            set { Traverser.DrawDelay = value; }
+        }
 
-        List<string> foundPaths = new List<string>();
-        Graph graph;
+        readonly List<string> foundPaths = new();
+        Graph graph = new();
         bool isFound = false;
-        
 
         // inisialisasi worker, traverser, dicts
-        public BackgroundWorker worker = new();
-        public DirectoryTraversal Traverser = new();
+        readonly BackgroundWorker worker = new();
+        static readonly DirectoryTraversal Traverser = new();
+        readonly GViewer graphViewer = new();
+        public GViewer GraphViewer { get { return graphViewer; } }
 
-        Dictionary<string, Edge> idToEdges;
-        Stopwatch sw = new Stopwatch();
-       
-        public Action<Graph>? UpdateGraph;
-        public Action<string>? UpdateStatus1;
-        public Action<string>? UpdateStatus2;
+        readonly Dictionary<string, Edge> idToEdges = new();
+        readonly Stopwatch sw = new();
+
+        public Action<string>? UpdateStatus;
+        public Action<string>? UpdateLink;
 
         public DirectoryDrawer()
         {
@@ -42,105 +42,113 @@ namespace DirectoryTraversal.GUI
             worker.ProgressChanged += new ProgressChangedEventHandler(Worker_ProgressChanged);
             worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Worker_CalculateTime);
             worker.WorkerReportsProgress = true;
+
             Traverser.OnFile = OnFile;
             Traverser.OnFound = OnFound;
             Traverser.OnDirectory = OnDirectory;
+
+            graphViewer.Graph = graph;
+            graphViewer.BackColor = SystemColors.ButtonShadow;
+            graphViewer.AutoSize = true;
+            graphViewer.Anchor = (AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
         }
 
-        void Traverse(string fromDirectory)
+        public void DrawTraverse()
+        {
+            worker.RunWorkerAsync();
+        }
+
+        void Traverse()
         {
             worker.ReportProgress(0, "create");
             isFound = false;
-            idToEdges = new();
-            DirectoryInfo dirMain = new(fromDirectory);
+            idToEdges.Clear();
+            DirectoryInfo dirMain = new(Path);
             worker.ReportProgress(0, string.Format(
                 "draw|node|{0}|{1}",
                 dirMain.FullName,
                 dirMain.Name
             ));
-            if (isDFS)
-            {
-                Traverser.Traverse(dirMain.FullName, fileName, allOccurences, Algorithm.DFS);
-            }
-            else
-            {
-                Traverser.Traverse(dirMain.FullName, fileName, allOccurences, Algorithm.BFS);
-            }
+            Traverser.Traverse(dirMain.FullName, FileName, AllOccurences, Algorithm);
+        }
 
+        void CreateGraph()
+        {
+            graph = new Graph(DateTime.Now.Ticks.ToString());
+        }
+
+        void DrawNodeGraph(string id, string label)
+        {
+            Node n = graph.AddNode(id);
+            n.LabelText = label;
+            n.Attr.Color = isFound ? Color.Black : Color.Red;
+        }
+
+        void DrawEdgeGraph(string fromId, string toId)
+        {
+            Edge edge = graph.AddEdge(fromId, toId);
+            edge.Attr.Color = isFound ? Color.Black : Color.Red;
+            idToEdges[string.Format("{0}|{1}", fromId, toId)] = edge;
+        }
+
+        void DrawFoundGraph(string nodeId)
+        {
+            isFound = true;
+            Node n = graph.FindNode(nodeId);
+            n.Attr.Color = Color.Green;
+            string child = nodeId;
+            string? parent = new FileInfo(nodeId).DirectoryName;
+            while (parent != null && child != Path)
+            {
+                Edge edge = idToEdges[string.Format("{0}|{1}", parent, child)];
+                edge.Attr.Color = Color.Green;
+                DirectoryInfo dir = new(parent);
+                n = graph.FindNode(dir.FullName);
+                n.Attr.Color = Color.Green;
+                child = dir.FullName;
+                parent = dir.Parent?.FullName;
+            }
         }
 
         void Worker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
         {
             string[]? s = e.UserState?.ToString()?.Split('|');
-            UpdateGraph.Invoke(null);
-
-            switch (s[0])
+            graphViewer.Graph = null;
+            switch (s?[0])
             {
                 case "create":
-                    graph = new Graph(DateTime.Now.Ticks.ToString());
+                    CreateGraph();
                     break;
                 case "draw":
                     if (s[1] == "node") // draw|node|id|label
-                    {
-                        Node n = graph.AddNode(s[2]);
-                        n.LabelText = s[3];
-                        n.Attr.Color = isFound ? Color.Black : Color.Red;
-                    }
+                        DrawNodeGraph(s[2], s[3]);
                     else if (s[1] == "edge") // draw|edge|from_id|to_id
-                    {
-                        Edge edge = graph.AddEdge(s[2], s[3]);
-                        edge.Attr.Color = isFound ? Color.Black : Color.Red;
-                        idToEdges[string.Format("{0}|{1}", s[2], s[3])] = edge;
-                    }
-                    else if (s[1] == "found")
-                    {
-                        isFound = true;
-                        Node n = graph.FindNode(s[2]);
-                        n.Attr.Color = Color.Green;
-                        string child = s[2];
-                        string? parent = new FileInfo(s[2]).DirectoryName;
-                        while (parent != null && child != path)
-                        {
-                            Edge edge = idToEdges[string.Format("{0}|{1}", parent, child)];
-                            edge.Attr.Color = Color.Green;
-                            DirectoryInfo dir = new(parent);
-                            n = graph.FindNode(dir.FullName);
-                            n.Attr.Color = Color.Green;
-                            child = dir.FullName;
-                            parent = dir.Parent?.FullName;
-                        }
-                    }
+                        DrawEdgeGraph(s[2], s[3]);
+                    else if (s[1] == "found") // draw|found|node_id
+                        DrawFoundGraph(s[2]);
                     break;
             }
-            UpdateGraph?.Invoke(graph);
+            graphViewer.Graph = graph;
         }
-
 
         void Worker_DoWork(object? sender, DoWorkEventArgs e)
         {
             sw.Reset();
             sw.Start();
-            running = true;
-            Traverse(path);
-            running = false;
+            IsRunning = true;
+            Traverse();
+            IsRunning = false;
         }
 
         void Worker_CalculateTime(object? sender, RunWorkerCompletedEventArgs e)
         {
             sw.Stop();
-            UpdateStatus1?.Invoke("Elapsed time (animation included): " + sw.ElapsedMilliseconds + " ms\n");
+            UpdateStatus?.Invoke("Elapsed time (animation included): " + sw.ElapsedMilliseconds + " ms\n");
             if (foundPaths.Count != 0)
-            {
                 foreach (string path in foundPaths)
-                {
-                    UpdateStatus2?.Invoke(path);
-
-                }
-            }
+                    UpdateLink?.Invoke(path);
             else
-            {
-                UpdateStatus1?.Invoke("\nFile " + fileName + " not found...");
-            }
+                UpdateStatus?.Invoke("\nFile " + FileName + " not found...");
             foundPaths.Clear();
         }
 

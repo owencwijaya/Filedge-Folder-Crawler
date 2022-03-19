@@ -1,156 +1,107 @@
-﻿using System.ComponentModel;
-using System.Diagnostics;
-using System.Drawing.Text;
-using Microsoft.Msagl.Drawing;
-using Microsoft.Msagl.GraphViewerGdi;
-using Color = Microsoft.Msagl.Drawing.Color;
-using DirectoryTraversal.Lib.Algorithms;
+﻿using System.Diagnostics;
 using MaterialSkin.Controls;
+using MaterialSkin;
 
 namespace DirectoryTraversal.GUI
 {
-    using DirectoryTraversal.Lib;
+
     public partial class MainForm : MaterialForm
     {
 
-        // Inisialisasi graphViewer, Drawer
-        GViewer graphViewer = new();
-        DirectoryDrawer Drawer = new();
-        public MaterialSkin.MaterialSkinManager SkinManager;
+        // Inisialisasi Drawer
+        readonly DirectoryDrawer Drawer = new();
+        public new MaterialSkinManager SkinManager;
         public MainForm()
         {
             InitializeComponent();
             OutputPanel.SuspendLayout();
-            OutputPanel.Controls.Add(graphViewer);
+            Drawer.GraphViewer.Size = new Size(OutputPanel.Width, OutputPanel.Height);
+            OutputPanel.Controls.Add(Drawer.GraphViewer);
             OutputPanel.ResumeLayout();
-            graphViewer.Size = new Size(OutputPanel.Width, OutputPanel.Height);
-            graphViewer.BackColor = SystemColors.ButtonShadow;
-            graphViewer.AutoSize = true;
-            graphViewer.Anchor = (AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
-            Drawer.UpdateGraph = UpdateGraph;
-            Drawer.UpdateStatus1 = UpdateStatus1;
-            Drawer.UpdateStatus2 = UpdateStatus2;
 
-            SkinManager = MaterialSkin.MaterialSkinManager.Instance;
+            Drawer.UpdateStatus = UpdateStatus;
+            Drawer.UpdateLink = UpdateLink;
+
+            SkinManager = MaterialSkinManager.Instance;
             SkinManager.EnforceBackcolorOnAllComponents = true;
             SkinManager.AddFormToManage(this);
-            SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
-            SkinManager.ColorScheme = new MaterialSkin.ColorScheme(
-                MaterialSkin.Primary.BlueGrey800,
-                MaterialSkin.Primary.BlueGrey900,
-                MaterialSkin.Primary.BlueGrey500,
-                MaterialSkin.Accent.LightBlue200,
-                MaterialSkin.TextShade.WHITE);
-
-            delaySpeed.onValueChanged += new MaterialSkin.Controls.MaterialSlider.ValueChanged(
-                (sender, e) =>
-                {
-                    Drawer.Traverser.DrawDelay = delaySpeed.Value;
-                    Drawer.drawDelay = delaySpeed.Value;
-                });
-
-            //PrivateFontCollection pfc = new PrivateFontCollection();
-            //pfc.AddFontFile("LexendDeca-Regular.ttf");
-            //DirLabel.Font = new Font(pfc.Families[0], 16);
+            SkinManager.Theme = MaterialSkinManager.Themes.DARK;
+            SkinManager.ColorScheme = new ColorScheme(
+                Primary.BlueGrey800,
+                Primary.BlueGrey900,
+                Primary.BlueGrey500,
+                Accent.LightBlue200,
+                TextShade.WHITE
+            );
         }
 
         private void DirButton_Click(object sender, EventArgs e)
         {
-            using (var fbd = new FolderBrowserDialog())
-            {
-                DialogResult res = fbd.ShowDialog();
+            using var fbd = new FolderBrowserDialog();
+            DialogResult res = fbd.ShowDialog();
 
-                if (res == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
-                {
-                    Drawer.path = fbd.SelectedPath;
-                    SelectedDir.Text = fbd.SelectedPath;
-                }
-                else
-                {
-                    MessageBox.Show(
-                      "Invalid path! Please try again...",
-                      "[WARNING] Invalid Path!"
-                    );
-                }
+            if (res == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+            {
+                Drawer.Path = fbd.SelectedPath;
+                SelectedDir.Text = fbd.SelectedPath;
+            }
+            else
+            {
+                MessageBox.Show(
+                  "Invalid path! Please try again...",
+                  "[WARNING] Invalid Path!"
+                );
             }
         }
 
         private void FileInput_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-            {
                 SearchButton_Click(sender, e);
-            }
         }
         private void BFSButton_CheckedChanged(object sender, EventArgs e)
         {
-            Drawer.isBFS = true;
-            if (Drawer.isDFS)
-            {
-                Drawer.isDFS = false;
-            }
+            Drawer.Algorithm = Lib.Algorithm.BFS;
         }
 
         private void OccurenceCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            Drawer.allOccurences = !Drawer.allOccurences;
+            Drawer.AllOccurences = !Drawer.AllOccurences;
         }
 
         private void DFSButton_CheckedChanged(object sender, EventArgs e)
         {
-            Drawer.isDFS = true;
-            if (Drawer.isBFS)
-            {
-                Drawer.isBFS = false;
-            }
+            Drawer.Algorithm = Lib.Algorithm.DFS;
         }
 
         private void SearchButton_Click(object sender, EventArgs e)
         {
-            if (!Drawer.running)
+            if (!Drawer.IsRunning)
             {
                 string initialAlert = "";
-                if (Drawer.path.Length == 0)
+                if (Drawer.Path.Length == 0)
                 {
                     initialAlert += "Please select a starting directory!";
                 }
-                if (this.FileInput.Text.Length == 0)
+                if (FileInput.Text.Length == 0)
                 {
                     initialAlert += "\nPlease enter a file name!";
                 }
-
                 if (initialAlert.Length != 0)
                 {
-                    System.Windows.Forms.MessageBox.Show(initialAlert,
+                    MessageBox.Show(initialAlert,
                         "[ALERT] Incomplete Data");
                     return;
                 }
-                string alert = "Folder path: " + Drawer.path + "\nMode: ";
-                if (Drawer.isBFS)
-                {
-                    alert += "Breadth First Search\n";
-                }
-                if (Drawer.isDFS)
-                {
-                    alert += "Depth First Search\n";
-                }
-                if (Drawer.allOccurences)
-                {
-                    alert += "Check all occurences: ENABLED";
-                }
-                Drawer.fileName = this.FileInput.Text;
-
-                MessageBox.Show(
-                  alert
-                );
+                Drawer.FileName = FileInput.Text;
                 foreach(Control c in RTF.Controls)
                 {
                     RTF.Controls.Remove(c);
                 }
-                Status.Text = "Searching for file '" + Drawer.fileName + "'...";
+                Status.Text = "Searching for file '" + Drawer.FileName + "'...";
 
                 // Start Drawing Travesal Graph
-                Drawer.worker.RunWorkerAsync();
+                Drawer.DrawTraverse();
             }
             else
             {
@@ -160,52 +111,38 @@ namespace DirectoryTraversal.GUI
             }
         }
 
-        private void delaySpeed_ValueChanged(object sender)
-        {
-            Drawer.Traverser.DrawDelay = delaySpeed.Value;
-            //delayLabel.Text = delaySpeed.Value.ToString() + " ms";
-            Drawer.drawDelay = delaySpeed.Value;
-        }
-
-
-        // Method Updater
-        void UpdateGraph(Graph graph)
-        {
-            graphViewer.Graph = graph;
-        }
-
-        void UpdateStatus1(String text)
+        void UpdateStatus(string text)
         {
             Status.Text = text;
         }
 
-        void UpdateStatus2(String text)
+        void UpdateLink(string text)
         {
-            LinkLabel link = new LinkLabel();
+            LinkLabel link = new();
             link.Text = text;
-            LinkLabel.Link data = new LinkLabel.Link();
+            LinkLabel.Link data = new();
             data.LinkData = text;
             link.Links.Add(data);
             link.MaximumSize = new Size(RTF.Width, 200);
             link.LinkColor = ColorTranslator.FromHtml("#2185a6");
             link.AutoSize = true;
-            link.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(
+            link.LinkClicked += new LinkLabelLinkClickedEventHandler(
                 (sender, e) => Process.Start(Environment.GetEnvironmentVariable("WINDIR") + @"\explorer.exe",
                 @text.Remove(text.LastIndexOf('\\'))));
             RTF.Controls.Add(link);
         }
 
-        private void materialSwitch1_CheckedChanged(object sender, EventArgs e)
+        private void ThemeSwitch_CheckedChanged(object sender, EventArgs e)
         {
-            if (SkinManager.Theme == MaterialSkin.MaterialSkinManager.Themes.DARK)
-            {
-                SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
-            }
-            else if (SkinManager.Theme == MaterialSkin.MaterialSkinManager.Themes.LIGHT)
-            {
-                SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.DARK;
-            }
+            if (SkinManager.Theme == MaterialSkinManager.Themes.DARK)
+                SkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+            else if (SkinManager.Theme == MaterialSkinManager.Themes.LIGHT)
+                SkinManager.Theme = MaterialSkinManager.Themes.DARK;
         }
 
+        private void DelaySpeed_ValueChanged(object sender, int newValue)
+        {
+            DirectoryDrawer.DrawDelay = newValue;
+        }
     }
 }

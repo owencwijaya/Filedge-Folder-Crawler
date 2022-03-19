@@ -191,6 +191,7 @@
             this.delaySpeed.Text = "Delay";
             this.delaySpeed.Value = 25;
             this.delaySpeed.ValueSuffix = " ms";
+            this.delaySpeed.onValueChanged += new MaterialSkin.Controls.MaterialSlider.ValueChanged(this.DelaySpeed_ValueChanged);
             // 
             // LabelDrawingDelay
             // 
@@ -393,10 +394,9 @@
             this.SelectedDir.Location = new System.Drawing.Point(17, 90);
             this.SelectedDir.MaximumSize = new System.Drawing.Size(300, 0);
             this.SelectedDir.MinimumSize = new System.Drawing.Size(300, 100);
-            this.SelectedDir.BorderStyle = BorderStyle.None;
             this.SelectedDir.MouseState = MaterialSkin.MouseState.HOVER;
             this.SelectedDir.Name = "SelectedDir";
-            this.SelectedDir.Size = new System.Drawing.Size(129, 14);
+            this.SelectedDir.Size = new System.Drawing.Size(300, 100);
             this.SelectedDir.TabIndex = 37;
             this.SelectedDir.Text = "Waiting for root folder...";
             // 
@@ -566,7 +566,7 @@
             this.materialSwitch1.Text = "Light Mode 🌞";
             this.materialSwitch1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.materialSwitch1.UseVisualStyleBackColor = true;
-            this.materialSwitch1.CheckedChanged += new System.EventHandler(this.materialSwitch1_CheckedChanged);
+            this.materialSwitch1.CheckedChanged += new System.EventHandler(this.ThemeSwitch_CheckedChanged);
             // 
             // materialLabel5
             // 
@@ -592,7 +592,7 @@
             // MainForm
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.MenuBar;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1366, 780);
@@ -600,7 +600,7 @@
             this.DrawerShowIconsWhenHidden = true;
             this.DrawerTabControl = this.materialTabControl1;
             this.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.MinimumSize = new System.Drawing.Size(1366, 768);
+            this.MinimumSize = new System.Drawing.Size(1364, 718);
             this.Name = "MainForm";
             this.Text = "Folder Crawler";
             this.materialTabControl1.ResumeLayout(false);
