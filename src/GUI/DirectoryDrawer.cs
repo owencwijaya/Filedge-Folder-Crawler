@@ -48,7 +48,7 @@ namespace DirectoryTraversal.GUI
             Traverser.OnDirectory = OnDirectory;
 
             graphViewer.Graph = graph;
-            graphViewer.BackColor = SystemColors.ButtonShadow;
+
             graphViewer.AutoSize = true;
             graphViewer.Anchor = (AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
         }

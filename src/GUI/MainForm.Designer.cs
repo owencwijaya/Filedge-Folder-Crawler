@@ -158,9 +158,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.OutputPanel.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.OutputPanel.ForeColor = System.Drawing.SystemColors.ButtonShadow;
-            this.OutputPanel.Location = new System.Drawing.Point(17, 35);
+            this.OutputPanel.Location = new System.Drawing.Point(20, 48);
             this.OutputPanel.Name = "OutputPanel";
-            this.OutputPanel.Size = new System.Drawing.Size(1265, 342);
+            this.OutputPanel.Size = new System.Drawing.Size(1265, 329);
             this.OutputPanel.TabIndex = 22;
             // 
             // materialCard4
@@ -602,9 +602,10 @@
             this.DrawerShowIconsWhenHidden = true;
             this.DrawerTabControl = this.materialTabControl1;
             this.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(1364, 718);
             this.Name = "MainForm";
-            this.Text = "Folder Crawler";
+            this.Text = "FilEdge";
             this.materialTabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.materialCard5.ResumeLayout(false);

@@ -16,7 +16,6 @@ namespace DirectoryTraversal.GUI
             InitializeComponent();
             OutputPanel.SuspendLayout();
             Drawer.GraphViewer.Size = new Size(OutputPanel.Width, OutputPanel.Height);
-            Drawer.GraphViewer.BackColor = SystemColors.ButtonShadow;
             Drawer.GraphViewer.ForeColor = SystemColors.ButtonShadow;
             OutputPanel.Controls.Add(Drawer.GraphViewer);
             OutputPanel.ResumeLayout();
