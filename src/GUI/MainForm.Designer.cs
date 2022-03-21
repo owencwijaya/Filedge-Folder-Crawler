@@ -563,9 +563,9 @@
             this.materialSwitch1.Name = "materialSwitch1";
             this.materialSwitch1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.materialSwitch1.Ripple = true;
-            this.materialSwitch1.Size = new System.Drawing.Size(158, 37);
+            this.materialSwitch1.Size = new System.Drawing.Size(155, 37);
             this.materialSwitch1.TabIndex = 39;
-            this.materialSwitch1.Text = "Light Mode 🌞";
+            this.materialSwitch1.Text = "Dark Mode 🌙";
             this.materialSwitch1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.materialSwitch1.UseVisualStyleBackColor = true;
             this.materialSwitch1.CheckedChanged += new System.EventHandler(this.ThemeSwitch_CheckedChanged);
@@ -594,7 +594,7 @@
             // MainForm
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.MenuBar;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1367, 790);
