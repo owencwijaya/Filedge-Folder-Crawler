@@ -81,13 +81,15 @@ namespace DirectoryTraversal.GUI
         {
             Node n = graph.AddNode(id);
             n.LabelText = label;
-            n.Attr.Color = isFound ? Color.Black : Color.Red;
+            //n.Attr.Color = isFound ? Color.Black : Color.Red;
+            n.Attr.Color = Color.Red;
         }
 
         void DrawEdgeGraph(string fromId, string toId)
         {
             Edge edge = graph.AddEdge(fromId, toId);
-            edge.Attr.Color = isFound ? Color.Black : Color.Red;
+            //edge.Attr.Color = isFound ? Color.Black : Color.Red;
+            edge.Attr.Color = Color.Red;
             idToEdges[string.Format("{0}|{1}", fromId, toId)] = edge;
         }
 
