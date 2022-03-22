@@ -5,6 +5,8 @@
         public Action<FileInfo>? OnFile;
         public Action<FileInfo>? OnFound;
         public Action<DirectoryInfo>? OnDirectory;
+        public Action<FileInfo>? OnVisitedFile;
+        public Action<DirectoryInfo>? OnVisitedDirectory;
         public string? FileName { get; set; }
         public int DrawDelay { get; set; }
         public bool IsFound { get; set; }

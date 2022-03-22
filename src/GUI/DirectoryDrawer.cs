@@ -22,7 +22,6 @@ namespace DirectoryTraversal.GUI
 
         readonly List<string> foundPaths = new();
         Graph graph = new();
-        bool isFound = false;
 
         // inisialisasi worker, traverser, dicts
         readonly BackgroundWorker worker = new();
@@ -46,11 +45,14 @@ namespace DirectoryTraversal.GUI
             Traverser.OnFile = OnFile;
             Traverser.OnFound = OnFound;
             Traverser.OnDirectory = OnDirectory;
+            Traverser.OnVisitedFile = OnVisited;
+            Traverser.OnVisitedDirectory = OnVisited;
 
             graphViewer.Graph = graph;
 
             graphViewer.AutoSize = true;
             graphViewer.Anchor = (AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
+            Algorithm = Algorithm.BFS;
         }
 
         public void DrawTraverse()
@@ -61,7 +63,6 @@ namespace DirectoryTraversal.GUI
         void Traverse()
         {
             worker.ReportProgress(0, "create");
-            isFound = false;
             idToEdges.Clear();
             DirectoryInfo dirMain = new(Path);
             worker.ReportProgress(0, string.Format(
@@ -81,21 +82,28 @@ namespace DirectoryTraversal.GUI
         {
             Node n = graph.AddNode(id);
             n.LabelText = label;
-            //n.Attr.Color = isFound ? Color.Black : Color.Red;
-            n.Attr.Color = Color.Red;
+            n.Attr.Color = Color.Black;
+        }
+        void DrawVisitedGraph(string fromId, string visitId)
+        {
+            Node fn = graph.FindNode(fromId);
+            Node tn = graph.FindNode(visitId);
+            Edge e = idToEdges[string.Format("{0}|{1}", fromId, visitId)];
+            if (fn.Attr.Color != Color.Green)
+                fn.Attr.Color = Color.Red;
+            tn.Attr.Color = Color.Red;
+            e.Attr.Color = Color.Red;
         }
 
         void DrawEdgeGraph(string fromId, string toId)
         {
             Edge edge = graph.AddEdge(fromId, toId);
-            //edge.Attr.Color = isFound ? Color.Black : Color.Red;
-            edge.Attr.Color = Color.Red;
+            edge.Attr.Color = Color.Black;
             idToEdges[string.Format("{0}|{1}", fromId, toId)] = edge;
         }
 
         void DrawFoundGraph(string nodeId)
         {
-            isFound = true;
             Node n = graph.FindNode(nodeId);
             n.Attr.Color = Color.Green;
             string child = nodeId;
@@ -124,6 +132,8 @@ namespace DirectoryTraversal.GUI
                 case "draw":
                     if (s[1] == "node") // draw|node|id|label
                         DrawNodeGraph(s[2], s[3]);
+                    else if (s[1] == "visit") // draw|visit|from_id|visit_id
+                        DrawVisitedGraph(s[2], s[3]);
                     else if (s[1] == "edge") // draw|edge|from_id|to_id
                         DrawEdgeGraph(s[2], s[3]);
                     else if (s[1] == "found") // draw|found|node_id
@@ -163,6 +173,23 @@ namespace DirectoryTraversal.GUI
             else
                 UpdateStatus?.Invoke("  | File " + FileName + " not found...");
             foundPaths.Clear();
+        }
+
+        void OnVisited(FileInfo File)
+        {
+            worker.ReportProgress(0, string.Format(
+                "draw|visit|{0}|{1}", //id pake fullname, nama pake name
+                File.DirectoryName,
+                File.FullName
+            ));
+        }
+        void OnVisited(DirectoryInfo Directory)
+        {
+            worker.ReportProgress(0, string.Format(
+                "draw|visit|{0}|{1}", //id pake fullname, nama pake name
+                Directory.Parent?.FullName,
+                Directory.FullName
+            ));
         }
 
         void OnFile(FileInfo File)

@@ -44,7 +44,12 @@ namespace DirectoryTraversal.GUI
             if (res == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
             {
                 Drawer.Path = fbd.SelectedPath;
-                SelectedDir.Text = fbd.SelectedPath;
+                var ch = fbd.SelectedPath.Chunk(43);
+                SelectedDir.Text = "";
+                foreach(char[] s in ch)
+                {
+                    SelectedDir.Text += new string(s) + "\n";
+                }
             }
             else
             {

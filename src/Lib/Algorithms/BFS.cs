@@ -19,11 +19,31 @@
             {
                 string DeqNode = Q.Dequeue();
                 DirectoryInfo DirMain = new(DeqNode);
+
+                // Bangkitkan simpul ekspan
+                foreach (DirectoryInfo Directory in DirMain.EnumerateDirectories().Reverse())
+                {
+                    if (!VisitedNodes.ContainsKey(Directory.FullName))
+                    {
+                        OnDirectory?.Invoke(Directory);
+                        Thread.Sleep(DrawDelay);
+                    }
+                }
                 foreach (FileInfo File in DirMain.EnumerateFiles().Reverse())
                 {
                     if (!VisitedNodes.ContainsKey(File.FullName))
                     {
                         OnFile?.Invoke(File);
+                        Thread.Sleep(DrawDelay);
+                    }
+                }
+
+                // Visit ke setiap file dan directory
+                foreach (FileInfo File in DirMain.EnumerateFiles())
+                {
+                    if (!VisitedNodes.ContainsKey(File.FullName))
+                    {
+                        OnVisitedFile?.Invoke(File);
                         if (File.Name == FileName)
                         {
                             OnFound?.Invoke(File);
@@ -35,24 +55,24 @@
 
                             }
                         }
+                        Thread.Sleep(DrawDelay);
                     }
-                    Thread.Sleep(DrawDelay);
                 }
-                foreach (DirectoryInfo Directory in DirMain.EnumerateDirectories().Reverse())
+                foreach (DirectoryInfo Directory in DirMain.EnumerateDirectories())
                 {
                     if (!VisitedNodes.ContainsKey(Directory.FullName))
                     {
-                        OnDirectory?.Invoke(Directory);
-                        Thread.Sleep(DrawDelay);
                         Q.Enqueue(Directory.FullName);
+                        OnVisitedDirectory?.Invoke(Directory);
+                        Thread.Sleep(DrawDelay);
                     }
                 }
             }
         }
-        public void Traverse(string DirPath, string FileName, bool AllOccurance)
+        public void Traverse(string DirPath, string FileName, bool AllOccurences)
         {
             this.FileName = FileName;
-            AllOccurences = AllOccurance;
+            this.AllOccurences = AllOccurences;
             TraverseBFS(DirPath);
         }
     }

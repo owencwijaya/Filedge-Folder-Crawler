@@ -12,6 +12,22 @@
         readonly BFS TraverseBFS = new();
         readonly DFS TraverseDFS = new();
 
+        public Action<FileInfo>? OnVisitedFile
+        {
+            set
+            {
+                TraverseDFS.OnVisitedFile = value;
+                TraverseBFS.OnVisitedFile = value;
+            }
+        }
+        public Action<DirectoryInfo>? OnVisitedDirectory
+        {
+            set
+            {
+                TraverseDFS.OnVisitedDirectory = value;
+                TraverseBFS.OnVisitedDirectory = value;
+            }
+        }
         public Action<FileInfo>? OnFile
         {
             set 
