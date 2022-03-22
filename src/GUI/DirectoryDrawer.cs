@@ -145,12 +145,23 @@ namespace DirectoryTraversal.GUI
         void Worker_CalculateTime(object? sender, RunWorkerCompletedEventArgs e)
         {
             sw.Stop();
-            UpdateStatus?.Invoke("Elapsed time (animation included): " + sw.ElapsedMilliseconds + " ms\n");
+            UpdateStatus?.Invoke("  | Elapsed time (animation included): " + sw.ElapsedMilliseconds + " ms");
             if (foundPaths.Count != 0)
+            {
+                if (foundPaths.Count == 1)
+                {
+                    UpdateStatus?.Invoke("  | File found!");
+                }
+                else
+                {
+                    UpdateStatus?.Invoke("  | " + foundPaths.Count + " files found! ");
+                }
                 foreach (string path in foundPaths)
                     UpdateLink?.Invoke(path);
+            }
+
             else
-                UpdateStatus?.Invoke("\nFile " + FileName + " not found...");
+                UpdateStatus?.Invoke("  | File " + FileName + " not found...");
             foundPaths.Clear();
         }
 

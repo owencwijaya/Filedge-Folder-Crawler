@@ -390,6 +390,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SelectedDir.AutoSize = true;
+            this.SelectedDir.BorderStyle = BorderStyle.None;
             this.SelectedDir.Depth = 0;
             this.SelectedDir.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.SelectedDir.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;

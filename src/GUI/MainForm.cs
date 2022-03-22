@@ -95,10 +95,7 @@ namespace DirectoryTraversal.GUI
                     return;
                 }
                 Drawer.FileName = FileInput.Text;
-                foreach(Control c in RTF.Controls)
-                {
-                    RTF.Controls.Remove(c);
-                }
+                RTF.Controls.Clear();
                 Status.Text = "Searching for file '" + Drawer.FileName + "'...";
 
                 // Start Drawing Travesal Graph
@@ -114,7 +111,7 @@ namespace DirectoryTraversal.GUI
 
         void UpdateStatus(string text)
         {
-            Status.Text = text;
+            Status.Text += text;
         }
 
         void UpdateLink(string text)
