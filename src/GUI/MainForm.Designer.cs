@@ -181,6 +181,7 @@
             // 
             // delaySpeed
             // 
+            this.delaySpeed.Cursor = System.Windows.Forms.Cursors.Hand;
             this.delaySpeed.Depth = 0;
             this.delaySpeed.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.delaySpeed.Location = new System.Drawing.Point(36, 53);
@@ -210,6 +211,7 @@
             // SearchButton
             // 
             this.SearchButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.SearchButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.SearchButton.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.SearchButton.Depth = 0;
             this.SearchButton.HighEmphasis = true;
@@ -246,6 +248,7 @@
             // DFSButton
             // 
             this.DFSButton.AutoSize = true;
+            this.DFSButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.DFSButton.Depth = 0;
             this.DFSButton.Location = new System.Drawing.Point(14, 77);
             this.DFSButton.Margin = new System.Windows.Forms.Padding(0);
@@ -265,6 +268,7 @@
             this.BFSButton.AutoSize = true;
             this.BFSButton.BackColor = System.Drawing.Color.Transparent;
             this.BFSButton.Checked = true;
+            this.BFSButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BFSButton.Depth = 0;
             this.BFSButton.Location = new System.Drawing.Point(14, 45);
             this.BFSButton.Margin = new System.Windows.Forms.Padding(0);
@@ -323,6 +327,7 @@
             // OccurenceCheckBox
             // 
             this.OccurenceCheckBox.AutoSize = true;
+            this.OccurenceCheckBox.Cursor = System.Windows.Forms.Cursors.Hand;
             this.OccurenceCheckBox.Depth = 0;
             this.OccurenceCheckBox.Location = new System.Drawing.Point(18, 103);
             this.OccurenceCheckBox.Margin = new System.Windows.Forms.Padding(0);
@@ -342,6 +347,7 @@
             this.FileInput.AnimateReadOnly = false;
             this.FileInput.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.FileInput.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.FileInput.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.FileInput.Depth = 0;
             this.FileInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.FileInput.HelperText = "Type file name...";
@@ -390,7 +396,6 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SelectedDir.AutoSize = true;
-            this.SelectedDir.BorderStyle = BorderStyle.None;
             this.SelectedDir.Depth = 0;
             this.SelectedDir.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.SelectedDir.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
@@ -419,6 +424,7 @@
             // DirButton
             // 
             this.DirButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.DirButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.DirButton.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.DirButton.Depth = 0;
             this.DirButton.HighEmphasis = true;
